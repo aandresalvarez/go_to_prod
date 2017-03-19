@@ -1,0 +1,60 @@
+
+
+
+table.go_prod_table {
+
+    width: 900px !important;
+    min-width: 900px;
+    max-width:900px;
+
+}
+
+
+
+table.go_prod_table td {
+
+   vertical-align: middle !important;
+
+}
+
+table.go_prod_table tr:hover {
+    background-color: #f9ab3d !important;
+    color: #ffffff;
+
+    font-weight: bolder !important;
+
+}
+
+
+.loader {
+    position: absolute;
+    left: 30%;
+    top: 100%;
+    z-index: 1;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 0.5s linear infinite;
+
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.btn-run {
+    border: none !important; /* Remove borders */
+    color: white !important; /* Add a text color */
+    padding: 14px 28px !important; /* Add some padding */
+    cursor: pointer !important; /* Add a pointer cursor on mouse-over */
+}
+
+.icon-flag.logo-icon-success {
+    width: 28px;  // 14px * 2
+height: 28px; // 14px * 2
+background-size: 938px 318px;  // original dimensions * 2
+background-position: -624px -48px;  // original position * 2
+}

@@ -1,0 +1,199 @@
+<?php
+/**
+ * Created by Alvaro Alvarez.
+ * User: alvaro1
+ * Date: 3/7/17
+ * Time: 5:20 PM
+ */
+
+// Call the REDCap Connect file in the main "redcap" directory
+//require_once "../../../redcap_connect.php";
+
+ class check_other_or_unknown {
+
+// Get the data dictionary for the current project in array format
+//$dd_array = REDCap::getDataDictionary('array');
+
+
+//Dictionary of warning words
+//public $Words = "Other, Unknown, Don't know/Not sure ,Don't know,Not sure, Not Reported, NA, N/A, uninterpretable, otro, otra, no se, Other please specify, not obtained, missing data, do not know or not sure, refused, no response was entered on form despite affirming that the patient was untestable, no response was entered on form despite affirming that the patient was testable, did not provide answer / not answered, other type, unclear, not gradable, other frequency, sent or stored other, none, no data available, unable to examine ";
+//public $Ids= "97,98,99,999,9999,888,8888,-1,777,7777";
+
+    /**
+     * @return string
+     */
+    public static function getKeyWords(){
+        $var= "Other, Unknown, Don't know/Not sure ,Don't know,Not sure, Not Reported, NA, N/A, uninterpretable, otro, otra, no se, Other please specify, not obtained, missing data, do not know or not sure, refused, no response was entered on form despite affirming that the patient was untestable, no response was entered on form despite affirming that the patient was testable, did not provide answer / not answered, other type, unclear, not gradable, other frequency, sent or stored other, none, no data available, unable to examine ";
+        return $var;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getIDs(){
+        $var="97,98,99,999,9999,888,8888,-1,777,7777";
+        return $var;
+    }
+
+
+
+    /**
+     * @param $DataDictionary
+     * @return array
+     * //Get dropdown, Checkbox  and Radio buttons from the REDCap Data Dictionary
+     */
+    public static function getLists($DataDictionary){
+        $var= array();
+        // Loop through each field and do something with each
+		foreach ($DataDictionary as $field_name=>$field_attributes){
+    			// Do something with this field if it is a checkbox field
+    			if ($field_attributes['field_type'] == "checkbox"   || $field_attributes['field_type'] == "radio"  || $field_attributes['field_type'] == "dropdown") {
+                    $FormName = $field_attributes['form_name'];
+                    $FieldName = $field_attributes['field_name'];                      
+                    $Choices = $field_attributes['select_choices_or_calculations']; 
+                    array_push( $var, Array($FormName,$FieldName,$Choices));
+                 }
+		}
+        return $var;
+    }
+
+
+
+    /**
+     * @param $array
+     * @return array
+     * //In: Array $FormName,$FieldName,$Choices  --- Return: Array $Form,$Field, Id, Value
+     */
+    public static function Transform($array){
+        $dd_array= array();
+        foreach ($array as $item){
+            $form=$item[0];
+            $field=$item[1];
+            $arrayOptions = explode("|",$item[2]);
+            foreach ($arrayOptions as $item2){
+                $arrayOptionsExplode=explode(",",$item2,2);
+                array_push( $dd_array, Array($form,$field,$arrayOptionsExplode[0],$arrayOptionsExplode[1]));
+
+            }
+        }
+        return $dd_array;
+    }
+
+
+
+    /**
+     * @param $string1
+     * @param $string2
+     * @param $percentage
+     * @return bool
+     * Compare two strings and return if they have a similarity bigger than $percentage
+     */
+    public static function EvaluateSimilarity($string1 , $string2, $percentage){
+
+        // first preparing the strings.
+            //for $string1
+            //remove spaces at the end and convert in lowercase
+            $word1=trim(strtolower($string1));
+            //remove spaces between words
+            $word1 = str_replace(' ', '_', $word1);
+            //remove tabs
+            $word1 = preg_replace('/\s+/','_',$word1);
+            $word1 = str_replace('__', '_', $word1);
+            // for $string2
+            //remove spaces at the end and convert in lowercase
+            $word2=trim(strtolower($string2));
+            //remove spaces between words
+            $word2 = str_replace(' ', '_', $word2);
+            //remove tabs
+            $word2 = preg_replace('/\s+/','_',$word2);
+            $word2 = str_replace('__', '_', $word2);
+        // obtain the % of similarity betwen words as a number and save the value on $similarity
+        similar_text($word1, $word2, $similarity);
+
+        return $similarity >= $percentage ? true : false;
+
+    }
+
+    /**
+     * @param $array
+     * @param $known_list
+     * @param $percentage
+     * @return array
+     *
+     * Generate an Array with just the question whit options that have similarity  to one of the elements of the list of Words (Other, Unknown..)
+     */
+    public static function FindOtherOrUnknown($array, $known_list,$percentage ){
+
+        $to_fix_array= array();
+        $OtherOrUnknownList = explode(",", $known_list);
+        foreach ($array as $list){
+            foreach ($OtherOrUnknownList as $Other){
+                if (self::EvaluateSimilarity($list[3],$Other,$percentage)){
+                    array_push( $to_fix_array, Array($list[0],$list[1],$list[2],$list[3]));
+                }
+            }
+        }
+        return $to_fix_array;
+}
+
+    /**
+     * @param $array
+     * @param $Ids
+     * @return array
+     * generate an array with  questions with codification problems for Other or Unknown..
+     */
+    public static function ListOfOtherOrUnknownWithProblems($array, $Ids){
+
+        global $Proj;
+        $to_fix_array= array();
+        $IdsList = explode(",", $Ids);
+        foreach ($array as $list){
+
+            if(!in_array($list[2], $IdsList)){
+                //check if this project is in production mode
+                if ($_SESSION["status"]==1){
+                    $link_path = APP_PATH_WEBROOT . 'Design/online_designer.php?pid=' . $_GET['pid'];
+
+
+                }else {
+                    $link_path = APP_PATH_WEBROOT . 'Design/online_designer.php?pid=' . $_GET['pid'] . '&page=' . $list[0] . '&field=' . $list[1];
+
+                }
+                     $link_to_edit = '<a href=' . $link_path . ' target="_blank" ><img src=' . APP_PATH_IMAGES .'pencil.png></a>';
+                    // Adding : Intrument Name, instrument
+                    array_push( $to_fix_array, Array(REDCap::getInstrumentNames($list[0]),$list[1],$list[2],$list[3],$link_to_edit));
+
+            }
+        }
+        return array_map("unserialize", array_unique(array_map("serialize", $to_fix_array)));
+
+    }
+
+
+    public static function CheckOtherOrUnknown($DataDictionary, $similarity){
+        $List= self::getLists($DataDictionary);
+        $Words=self::getKeyWords();
+        $Ids=self::getIDs();
+        $REDCapList= self::Transform($List);
+        $AllOther =self::FindOtherOrUnknown($REDCapList,$Words,$similarity);
+        return self::ListOfOtherOrUnknownWithProblems($AllOther,$Ids);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+ }
+
+ 
+
+
+
+
