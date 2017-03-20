@@ -34,12 +34,15 @@ if ($status == 1)
 {
     echo lang('PRODUCTION_WARNING');
 }
-echo "<pre>";
+//echo "<pre>";
  //print_r($Proj);
- echo "</pre>";
+// echo "</pre>";
 ?>
 <link rel="stylesheet" href="styles/go_prod_styles.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
 
 
@@ -70,29 +73,42 @@ echo "<pre>";
     </div>
 
 
-<!-- Modal -->
-<div class="modal fade " id="ResultsModal" tabindex="-1" role="dialog" aria-labelledby="ResultsModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content ">
-            <div class="modal-header">
 
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+
+
+
+    <div id="ResultsModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Event</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Loading...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+
             </div>
-            <div class="modal-body clearable-content"><div class="te"></div></div>
-
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+    <!-- Event modal -->
 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 
 
     <script>
+
+
         $( document ).ready(function() {
 
             $('#go_prod_table').hide();
@@ -101,13 +117,10 @@ echo "<pre>";
             //$('#go_prod_tbody').load("classes/check_main.php?pid=<php echo $_GET['pid']; ?>");
 
             $("#go_prod_go_btn").click(function(){
-
                 $('#gp-loader').show();
                 $(this).prop("disabled",true);
                 //$(this).hide();
-
                 $.ajax({url: "classes/ajax_handler.php?pid=<?php echo $_GET['pid']; ?>", success: function(result){
-
                     $('#go_prod_table').show();
                     $('#gp-loader').hide();
 
@@ -124,9 +137,29 @@ echo "<pre>";
                     // $('.glyphicon-menu-down').hide();
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
+                        console.log( "entro al hidden modal" );
                         $(this).children('.gp-body-content').slideToggle();
 
                     });
+
+
+                    /* This code load the content of the link in the same modal */
+                    $(function() {
+                        $('[data-load-remote]').on('click',function(e) {
+                            e.preventDefault();
+                            var $this = $(this);
+                            var remote = $this.data('load-remote');
+                            if (!$this.data('isloaded')) {
+                                if(remote) {
+                                    $($this.data('remote-target')).load(remote);
+                                    $this.data('isloaded', true)
+                                }
+                            }
+                        });
+                    });
+
+
+
 
                     $('#go_prod_go_btn').prop("disabled",false);
                     $('#go_prod_go_btn').html('Run again');
@@ -134,21 +167,26 @@ echo "<pre>";
                     $('#go_prod_go_btn').click(function() {
                         //$("#go_prod_tbody").html('');
                         $('#go_prod_table').hide();
+
                     });
-
-
 
                 }});
             });
 
             console.log( "ready!" );
+            //$('#ResultsModal').onHide().removeData('modal');
+           /* $("#ResultsModal").on('hidden.bs.modal', function () {
+                // $(this).data('bs.modal', null);
 
 
+               // $(this).removeData('bs.modal');
 
 
+                // $(this).text('default-label');
+                //$(this).html('');
 
-
-
+                console.log("ENTRO!!!");
+            });*/
 
         });
 

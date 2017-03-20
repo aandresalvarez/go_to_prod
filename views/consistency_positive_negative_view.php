@@ -8,7 +8,7 @@
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
-
+echo '<pre>' . print_r($_SESSION["PositiveNegativeConsistentErrors"], TRUE) . '</pre>';
 
 ?>
 
@@ -36,7 +36,7 @@ require_once "../../../redcap_connect.php";
 
     <script>
 
-        dataSet = <?php echo json_encode($_SESSION["is_positive_negative_consistent"])?>;
+        dataSet = <?php echo json_encode($_SESSION["PositiveNegativeConsistentErrors"])?>;
 
         $(document).ready(function() {
 

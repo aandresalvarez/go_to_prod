@@ -9,7 +9,7 @@
 require_once "../../../redcap_connect.php";
 
 
-
+echo '<pre>' . print_r($_SESSION["BranchingLogicErrors"], TRUE) . '</pre>';
 ?>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
@@ -36,7 +36,7 @@ require_once "../../../redcap_connect.php";
 
 <script>
 
-    dataSet = <?php echo json_encode($_SESSION["branching_logic_problems_found"])?>;
+    dataSet = <?php echo json_encode($_SESSION["BranchingLogicErrors"])?>;
 
     $(document).ready(function() {
 

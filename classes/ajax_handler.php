@@ -80,7 +80,10 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
         $array=$res::CheckOtherOrUnknown($DataDictionary, $similarity);
 
         if(!empty($array)){
-            $a='<a data-toggle="modal" role="button" class="btn" href="views/other_or_unknown_view.php " data-target="#ResultsModal">'.lang('VIEW').'</a>';
+
+
+           // $a='<a data-toggle="modal" role="button" class="btn" data-load-remote="views/other_or_unknown_view.php " data-target="#ResultsModal">'.lang('VIEW').'</a>';
+            $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/other_or_unknown_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
             $span='<span class="label label-danger">'.lang('DANGER').'</span>';
             $_SESSION["OtherOrUnknownErrors"]= $array;
            return PrintTr(lang('OTHER_OR_UNKNOWN_TITLE'),lang('OTHER_OR_UNKNOWN_BODY'),$span,$a);
@@ -93,7 +96,8 @@ function PrintBranchingLogicErrors($DataDictionary){
         $res= new check_presence_of_branching_logic_variables();
         $array=$res::CheckIfBranchingLogicVariablesExist($DataDictionary);
         if (!empty($array)){
-            $a='<a data-toggle="modal" role="button" class="btn" href="views/presence_of_branching_logic_variables_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+            $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/presence_of_branching_logic_variables_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+           // $a='<a data-toggle="modal" role="button" class="btn" data-load-remote="views/presence_of_branching_logic_variables_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
             $span='<span class="label label-danger">'.lang('DANGER').'</span>';
             $_SESSION["BranchingLogicErrors"]= $array;
             return PrintTr(lang('BRANCHING_LOGIC_TITLE'),lang('BRANCHING_LOGIC_BODY'),$span,$a);
@@ -108,7 +112,9 @@ function PrintDatesConsistentErrors($DataDictionary){
     $res= new check_consistency_for_dates();
     $array=$res::IsDatesConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_for_dates_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_for_dates_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
+
+        //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_for_dates_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["DatesConsistentErrors"]= $array;
         return PrintTr(lang('DATE_CONSISTENT_TITLE'),lang('DATE_CONSISTENT_BODY'),$span,$a);
@@ -123,7 +129,8 @@ function PrintYesNoConsistentErrors($DataDictionary){
     $res= new check_consistency_for_lists();
     $array=$res::IsYesNoConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_yes_no_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
+        //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["YesNoConsistentErrors"]= $array;
         return PrintTr(lang('YES_NO_TITLE'),lang('YES_NO_BODY'),$span,$a);
@@ -138,7 +145,9 @@ function PrintPositiveNegativeConsistentErrors($DataDictionary){
     $res= new check_consistency_for_lists();
     $array=$res::IsPositiveNegativeConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_positive_negative_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
+
+       // $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["PositiveNegativeConsistentErrors"]= $array;
         return PrintTr(lang('POSITIVE_NEGATIVE_TITLE'),lang('POSITIVE_NEGATIVE_BODY'),$span,$a);

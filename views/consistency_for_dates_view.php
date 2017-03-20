@@ -8,6 +8,7 @@
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
+echo '<pre>' . print_r($_SESSION["DatesConsistentErrors"], TRUE) . '</pre>';
 
 
 ?>
@@ -38,7 +39,7 @@ require_once "../../../redcap_connect.php";
 
 
 
-    dataSet = <?php echo json_encode($_SESSION["is_date_consistent"])?>;
+    dataSet = <?php echo json_encode($_SESSION["DatesConsistentErrors"])?>;
 
     $(document).ready(function() {
 
