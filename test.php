@@ -13,7 +13,15 @@ require_once "../../redcap_connect.php";
 // OPTIONAL: Display the project header
 require_once APP_PATH_DOCROOT . 'ProjectGeneral/header.php';
 require_once 'classes/messages.php';
-$lang_vars= new messages();
+require_once 'classes/check_user_rights.php';
+
+
+// Check if user can create new records, if not Exit.
+IsProjectAdmin();
+
+
+
+
 //project information
 global $Proj;
 
@@ -21,52 +29,46 @@ global $Proj;
 //echo APP_PATH_WEBROOT;
 //echo redcap_info();
 
-// KWarning if project is  in production status
+// Warning if project is in production mode
 if ($status == 1)
 {
-    echo $lang_vars->lang('PRODUCTION_WARNING');
+    echo lang('PRODUCTION_WARNING');
 }
-
+echo "<pre>";
+ //print_r($Proj);
+ echo "</pre>";
 ?>
-    <link rel="stylesheet" href="styles/go_prod_styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="styles/go_prod_styles.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
-    <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span><?php echo $lang_vars->lang('TITLE');?> </div>
 
 
+
+
+
+
+    <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span><?php echo lang('TITLE');?> </div>
     <div id="main-container">
-    <div><p ><?php echo $lang_vars->lang('MAIN_TEXT');?></p></div>
-
-
-
-
-    <button id="go_prod_go_btn" class=" btn btn-lg btn-primary btn-run"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
-
+        <div><p ><?php echo lang('MAIN_TEXT');?></p></div>
+        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary btn-run"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
         <hr>
+        <table  id="go_prod_table" class="table table-striped " >
+                <thead>
+                <tr>
+                    <th><strong></strong></th>
+                    <th><strong>Validation</strong></th>
+                    <th><strong>Result</strong></th>
+                    <th><strong>Options</strong></th>
+                </tr>
+                </thead>
+                <tbody id="go_prod_tbody">
+                </tbody>
+        </table>
 
-    <table  id="go_prod_table" class="table table-striped " >
-    <thead>
-    <tr>
-        <th><strong></strong></th>
-        <th><strong>Validation</strong></th>
-        <th><strong>Result</strong></th>
-        <th><strong>Options</strong></th>
-    </tr>
-    </thead>
-    <tbody id="go_prod_tbody">
-
-
-
-
-
-
-    </tbody>
-</table>
-
-    <div id="gp-loader" ><div  class="loader"></div></div>
-
+        <div id="gp-loader" ><div  class="loader"></div></div>
     </div>
+
 
 <!-- Modal -->
 <div class="modal fade " id="ResultsModal" tabindex="-1" role="dialog" aria-labelledby="ResultsModalLabel" aria-hidden="true">
@@ -85,9 +87,9 @@ if ($status == 1)
 </div>
 <!-- /.modal -->
 
-</body>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
     <script>
@@ -119,7 +121,7 @@ if ($status == 1)
                     });
                     $('.gp-info-content').children('.gp-body-content').hide();
 
-                   // $('.glyphicon-menu-down').hide();
+                    // $('.glyphicon-menu-down').hide();
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
                         $(this).children('.gp-body-content').slideToggle();
@@ -130,7 +132,7 @@ if ($status == 1)
                     $('#go_prod_go_btn').html('Run again');
 
                     $('#go_prod_go_btn').click(function() {
-                       //$("#go_prod_tbody").html('');
+                        //$("#go_prod_tbody").html('');
                         $('#go_prod_table').hide();
                     });
 
@@ -150,13 +152,7 @@ if ($status == 1)
 
         });
 
-
-
-
-
-
     </script>
-
 
 <?php
 

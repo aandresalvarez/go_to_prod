@@ -37,11 +37,7 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 global $Proj;
 
 require  'messages.php';
- function  Lang($phrase){
 
-     $lang_vars= new messages();
-     return $lang_vars->lang($phrase);
-}
 
 
 function PrintTr($title_text,$body_text,$span_label,$a_tag){
@@ -84,10 +80,10 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
         $array=$res::CheckOtherOrUnknown($DataDictionary, $similarity);
 
         if(!empty($array)){
-            $a='<a data-toggle="modal" role="button" class="btn" href="views/other_or_unknown_view.php?data='.$array.' " data-target="#ResultsModal">'.Lang('VIEW').'</a>';
-            $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
+            $a='<a data-toggle="modal" role="button" class="btn" href="views/other_or_unknown_view.php " data-target="#ResultsModal">'.lang('VIEW').'</a>';
+            $span='<span class="label label-danger">'.lang('DANGER').'</span>';
             $_SESSION["OtherOrUnknownErrors"]= $array;
-           return PrintTr(Lang('OTHER_OR_UNKNOWN_TITLE'),Lang('OTHER_OR_UNKNOWN_BODY'),$span,$a);
+           return PrintTr(lang('OTHER_OR_UNKNOWN_TITLE'),lang('OTHER_OR_UNKNOWN_BODY'),$span,$a);
         }else return false;
 
     }
@@ -97,10 +93,10 @@ function PrintBranchingLogicErrors($DataDictionary){
         $res= new check_presence_of_branching_logic_variables();
         $array=$res::CheckIfBranchingLogicVariablesExist($DataDictionary);
         if (!empty($array)){
-            $a='<a data-toggle="modal" role="button" class="btn" href="views/presence_of_branching_logic_variables_view.php" data-target="#ResultsModal">'.Lang('VIEW').'</a>';
-            $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
+            $a='<a data-toggle="modal" role="button" class="btn" href="views/presence_of_branching_logic_variables_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+            $span='<span class="label label-danger">'.lang('DANGER').'</span>';
             $_SESSION["BranchingLogicErrors"]= $array;
-            return PrintTr(Lang('BRANCHING_LOGIC_TITLE'),Lang('BRANCHING_LOGIC_BODY'),$span,$a);
+            return PrintTr(lang('BRANCHING_LOGIC_TITLE'),lang('BRANCHING_LOGIC_BODY'),$span,$a);
 
         }else return false;
 
@@ -112,10 +108,10 @@ function PrintDatesConsistentErrors($DataDictionary){
     $res= new check_consistency_for_dates();
     $array=$res::IsDatesConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_for_dates_view.php" data-target="#ResultsModal">'.Lang('VIEW').'</a>';
-        $span='<span class="label label-warning">'.Lang('WARNING').'</span>';
+        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_for_dates_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["DatesConsistentErrors"]= $array;
-        return PrintTr(Lang('DATE_CONSISTENT_TITLE'),Lang('DATE_CONSISTENT_BODY'),$span,$a);
+        return PrintTr(lang('DATE_CONSISTENT_TITLE'),lang('DATE_CONSISTENT_BODY'),$span,$a);
 
     }else return false;
 
@@ -127,10 +123,10 @@ function PrintYesNoConsistentErrors($DataDictionary){
     $res= new check_consistency_for_lists();
     $array=$res::IsYesNoConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.Lang('VIEW').'</a>';
-        $span='<span class="label label-warning">'.Lang('WARNING').'</span>';
+        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["YesNoConsistentErrors"]= $array;
-        return PrintTr(Lang('YES_NO_TITLE'),Lang('YES_NO_BODY'),$span,$a);
+        return PrintTr(lang('YES_NO_TITLE'),lang('YES_NO_BODY'),$span,$a);
 
     }else return false;
 
@@ -142,10 +138,10 @@ function PrintPositiveNegativeConsistentErrors($DataDictionary){
     $res= new check_consistency_for_lists();
     $array=$res::IsPositiveNegativeConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.Lang('VIEW').'</a>';
-        $span='<span class="label label-warning">'.Lang('WARNING').'</span>';
+        $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["PositiveNegativeConsistentErrors"]= $array;
-        return PrintTr(Lang('POSITIVE_NEGATIVE_TITLE'),Lang('POSITIVE_NEGATIVE_BODY'),$span,$a);
+        return PrintTr(lang('POSITIVE_NEGATIVE_TITLE'),lang('POSITIVE_NEGATIVE_BODY'),$span,$a);
 
     }else return false;
 
@@ -158,10 +154,10 @@ function PrintIdentifiersErrors($DataDictionary){
     $res= new check_identifiers();
     $identifiers_found=$res::AnyIdentifier($DataDictionary);
     if (!$identifiers_found){
-        $a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.Lang('EDIT').'</a>';
-        $span='<span class="label label-warning">'.Lang('WARNING').'</span>';
+        $a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         //$_SESSION["PositiveNegativeConsistentErrors"]= $identifiers_found;
-        return PrintTr(Lang('IDENTIFIERS_TITLE'),Lang('IDENTIFIERS_BODY'),$span,$a);
+        return PrintTr(lang('IDENTIFIERS_TITLE'),lang('IDENTIFIERS_BODY'),$span,$a);
 
     }else return false;
 
@@ -173,11 +169,11 @@ function PrintPIErrors($proj){
     $res= new check_pi_irb_type();
     $pi_found=$res::PIExist($proj);
     if (!$pi_found){
-        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.Lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.Lang('EDIT').'</a>';
-        $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
+        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
+        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
         //$_SESSION["PiErrors"]= $pi_found;
-        return PrintTr(Lang('PI_TITLE'),Lang('PI_BODY'),$span,$a);
+        return PrintTr(lang('PI_TITLE'),lang('PI_BODY'),$span,$a);
 
     }else return false;
 
@@ -189,11 +185,11 @@ function PrintIRBErrors($proj){
     $res= new check_pi_irb_type();
     $pi_found=$res::IRBExist($proj);
     if (!$pi_found){
-        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.Lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.Lang('EDIT').'</a>';
-        $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
+        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
+        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
         //$_SESSION["PiErrors"]= $pi_found;
-        return PrintTr(Lang('IRB_TITLE'),Lang('IRB_BODY'),$span,$a);
+        return PrintTr(lang('IRB_TITLE'),lang('IRB_BODY'),$span,$a);
 
     }else return false;
 
@@ -205,11 +201,11 @@ function PrintResearchErrors($proj){
     $res= new check_pi_irb_type();
     $research_found=$res::IsAResearchProject($proj);
     if (!$research_found){
-        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.Lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.Lang('EDIT').'</a>';
-        $span='<span class="label label-warning">'.Lang('WARNING').'</span>';
+        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
+        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         //$_SESSION["PiErrors"]= $pi_found;
-        return PrintTr(Lang('RESEARCH_PROJECT_TITLE'),Lang('RESEARCH_PROJECT_BODY'),$span,$a);
+        return PrintTr(lang('RESEARCH_PROJECT_TITLE'),lang('RESEARCH_PROJECT_BODY'),$span,$a);
 
     }else return true;
 
@@ -220,11 +216,11 @@ function PrintJustForFunErrors($proj){
     $res= new check_pi_irb_type();
     $jff_found=$res::IsJustForFunProject($proj);
     if ($jff_found){
-        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.Lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.Lang('EDIT').'</a>';
-        $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
+        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
+        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
         //$_SESSION["PiErrors"]= $pi_found;
-        return PrintTr(Lang('JUST_FOR_FUN_PROJECT_TITLE'),Lang('JUST_FOR_FUN_PROJECT_BODY'),$span,$a);
+        return PrintTr(lang('JUST_FOR_FUN_PROJECT_TITLE'),lang('JUST_FOR_FUN_PROJECT_BODY'),$span,$a);
 
     }else{
 
@@ -240,12 +236,12 @@ function PrintTestRecordsErrors(){
 
     $array=$res::CheckTestRecordsAndExports();
     if (!empty($array)){
-       // $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.Lang('VIEW').'</a>';
+       // $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $a= '<u>Exports:</u>'.$array[0].'<br><u> Records: </u>'.$array[1];
 
-        $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
         //$_SESSION["PositiveTestRecordsErrors"]= $array;
-        return PrintTr(Lang('TEST_RECORDS_TITLE'),Lang('TEST_RECORDS_BODY'),$span,$a);
+        return PrintTr(lang('TEST_RECORDS_TITLE'),lang('TEST_RECORDS_BODY'),$span,$a);
 
     }else return false;
 
@@ -255,9 +251,9 @@ function PrintTestRecordsErrors(){
 
 function PrintSuccess(){
 //TODO: send directly to move to production screen
-    $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.Lang('PROJECT_SETUP').'</a>';
-    $span='<span class="label label-success">'.Lang('SUCCESS').'</span>';
-    return PrintTr(Lang('READY_TO_GO_TITLE'),Lang('READY_TO_GO_BODY'),$span,$a);
+    $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
+    $span='<span class="label label-success">'.lang('SUCCESS').'</span>';
+    return PrintTr(lang('READY_TO_GO_TITLE'),lang('READY_TO_GO_BODY'),$span,$a);
 
 
 }

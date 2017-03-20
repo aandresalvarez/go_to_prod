@@ -8,7 +8,8 @@
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
-print_r( $_SESSION["other_or_unknown"]);
+//print_r( $_SESSION["OtherOrUnknownErrors"]);
+
 //echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 //echo  $_SESSION["t"];
 //echo '<pre>' . print_r($_SESSION["other_or_unknown_problems_found"], TRUE) . '</pre>';
@@ -45,10 +46,12 @@ print_r( $_SESSION["other_or_unknown"]);
 
 
 
+<?php echo '<pre>' . print_r($_SESSION["OtherOrUnknownErrors"]) . '</pre>'; ?>
+
 
 <script>
 
-    dataSet = <?php echo json_encode($_SESSION["other_or_unknown"])?>;
+    dataSet = <?php echo json_encode($_SESSION["OtherOrUnknownErrors"])?>;
 
 
     $(document).ready(function() {

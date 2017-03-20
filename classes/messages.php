@@ -1,14 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: alvaro1
- * Date: 3/16/17
- * Time: 11:45 PM
+ * LANGUAJE FILE
+ * Just here you can change the text content of the plugin
+ *
  */
 //Validation Labels
-class messages{
 
 
+    //TODO: Improve the styles  creating a css file.
     function lang($phrase){
         static $lang = array(
             'OTHER_OR_UNKNOWN_TITLE' => 'Incorrect Coding of "Other" and "Unknown" values in drop-down lists, radio-buttons or check-boxes.',
@@ -16,9 +15,6 @@ class messages{
             'YES_NO_TITLE'=>'Different coding for yes/no questions.',
             'YES_NO_BODY' => 'When data is analyzed in statistical software you often only see the \'coded\' values.  So, it is important to be consistent across your project so the codes don\'t arbitrarily change from question to question.  In REDCap, the standard for \'Yes\' is 1 and \'No\' is 0.  If you select the Yes/No question type this is now it will be coded.
                         You should avoid using values other than 0 or 1 for No and Yes. Order doesn\'t matter, so you can make your radio button fields as: <ul class="list-group" style=" padding-left: 50px; width: 150px; "><li class="list-group-item">1, Yes</li><li class="list-group-item">0, No</li><li class="list-group-item">99, Other</li></ul>If you want the Yes option to come first.',
-
-
-
 
             'POSITIVE_NEGATIVE_TITLE' =>'Different coding for Positive/Negative questions.',
             'POSITIVE_NEGATIVE_BODY' =>'When data is analyzed in statistical software you often only see the \'coded\' values.  So, it is important to be consistent across your project so the codes don\'t arbitrarily change from question to question.',
@@ -51,8 +47,6 @@ class messages{
             'READY_TO_GO_TITLE' => ' You are all set!. ',
             'READY_TO_GO_BODY' => 'Looks like you are ready to move this project to Production mode!.',
 
-
-
             'WARNING' => 'Warning',
             'DANGER' => 'Danger',
             'SUCCESS' => 'Success',
@@ -60,12 +54,11 @@ class messages{
             'EDIT' => 'Edit',
             'PROJECT_SETUP' => 'Project Setup',
             'PROJECT_GO_PROD' => 'Project Setup',
-
+            'USER_RIGHTS' => ' Sorry '.USERID.', just users who CAN edit this project are allowed to run this plugin.',
 
             'PRODUCTION_WARNING' => '<div class="alert alert-warning"><strong>Warning!</strong> This plugin may not work as is expected in <strong style=\'color: green\'>Production</strong> mode. For better results move back to <strong>Development</strong> mode.</div>',
             'TITLE' => 'Go to Production mode Check List',
             'MAIN_TEXT' => 'If the thought of loosing the data you have entered into your REDCap project sounds painful, then you should be in Production mode. Production mode helps protect your data from accidental mistakes. This plugin will allow you to verify if your project is ready to go to production or you ned to fix something before.  <a href="https://medwiki.stanford.edu/x/SRMzAw" > <u>When do I move to Production Mode?</u></a>'
-
 
         );
 
@@ -74,4 +67,4 @@ class messages{
 
 
 
-}
+//}
