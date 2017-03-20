@@ -11,11 +11,7 @@ table.go_prod_table {
 
 
 
-table.go_prod_table td {
 
-   vertical-align: middle !important;
-
-}
 
 table.go_prod_table tr:hover {
     background-color: #f9ab3d !important;
@@ -24,7 +20,11 @@ table.go_prod_table tr:hover {
     font-weight: bolder !important;
 
 }
+table.go_prod_table tr {
 
+    vertical-align: middle !important;
+
+}
 
 .loader {
     position: absolute;

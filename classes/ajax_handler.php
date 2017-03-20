@@ -88,7 +88,7 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
             $span='<span class="label label-danger">'.Lang('DANGER').'</span>';
             $_SESSION["OtherOrUnknownErrors"]= $array;
            return PrintTr(Lang('OTHER_OR_UNKNOWN_TITLE'),Lang('OTHER_OR_UNKNOWN_BODY'),$span,$a);
-        }
+        }else return false;
 
     }
 
@@ -102,7 +102,7 @@ function PrintBranchingLogicErrors($DataDictionary){
             $_SESSION["BranchingLogicErrors"]= $array;
             return PrintTr(Lang('BRANCHING_LOGIC_TITLE'),Lang('BRANCHING_LOGIC_BODY'),$span,$a);
 
-        }
+        }else return false;
 
 
     }
@@ -117,7 +117,7 @@ function PrintDatesConsistentErrors($DataDictionary){
         $_SESSION["DatesConsistentErrors"]= $array;
         return PrintTr(Lang('DATE_CONSISTENT_TITLE'),Lang('DATE_CONSISTENT_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 }
@@ -132,7 +132,7 @@ function PrintYesNoConsistentErrors($DataDictionary){
         $_SESSION["YesNoConsistentErrors"]= $array;
         return PrintTr(Lang('YES_NO_TITLE'),Lang('YES_NO_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 }
@@ -147,7 +147,7 @@ function PrintPositiveNegativeConsistentErrors($DataDictionary){
         $_SESSION["PositiveNegativeConsistentErrors"]= $array;
         return PrintTr(Lang('POSITIVE_NEGATIVE_TITLE'),Lang('POSITIVE_NEGATIVE_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 }
@@ -163,7 +163,7 @@ function PrintIdentifiersErrors($DataDictionary){
         //$_SESSION["PositiveNegativeConsistentErrors"]= $identifiers_found;
         return PrintTr(Lang('IDENTIFIERS_TITLE'),Lang('IDENTIFIERS_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 }
@@ -179,7 +179,7 @@ function PrintPIErrors($proj){
         //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(Lang('PI_TITLE'),Lang('PI_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 }
@@ -195,7 +195,7 @@ function PrintIRBErrors($proj){
         //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(Lang('IRB_TITLE'),Lang('IRB_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 }
@@ -211,7 +211,7 @@ function PrintResearchErrors($proj){
         //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(Lang('RESEARCH_PROJECT_TITLE'),Lang('RESEARCH_PROJECT_BODY'),$span,$a);
 
-    }
+    }else return true;
 
 
 }
@@ -226,6 +226,9 @@ function PrintJustForFunErrors($proj){
         //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(Lang('JUST_FOR_FUN_PROJECT_TITLE'),Lang('JUST_FOR_FUN_PROJECT_BODY'),$span,$a);
 
+    }else{
+
+        return false;
     }
 
 
@@ -244,7 +247,7 @@ function PrintTestRecordsErrors(){
         //$_SESSION["PositiveTestRecordsErrors"]= $array;
         return PrintTr(Lang('TEST_RECORDS_TITLE'),Lang('TEST_RECORDS_BODY'),$span,$a);
 
-    }
+    }else return false;
 
 
 
@@ -259,29 +262,56 @@ function PrintSuccess(){
 
 }
 
-//echo '<table border="2">'.getOtherOrUnknownErrors($data_dictionary_array, 80 ).'</table>';
-echo PrintSuccess();
-echo PrintTestRecordsErrors();
-echo PrintJustForFunErrors($Proj);
-
-echo PrintResearchErrors($Proj);
-
-echo PrintPIErrors($Proj);
-echo PrintIRBErrors($Proj);
 
 
-echo   PrintOtherOrUnknownErrors($data_dictionary_array, 80 );
-echo PrintBranchingLogicErrors($data_dictionary_array);
-echo PrintDatesConsistentErrors($data_dictionary_array);
+//IF is Jus for fun do not check anything ,Just for fun project do not go to production
+$just_for_fun=PrintJustForFunErrors($Proj);
+if($just_for_fun){
+    echo $just_for_fun;
+}else{
 
-echo PrintYesNoConsistentErrors($data_dictionary_array);
+    //IS is a research project ask for PI and IRB
+    $research=PrintResearchErrors($Proj);
+    if($research){
 
-echo PrintPositiveNegativeConsistentErrors($data_dictionary_array);
+        echo PrintPIErrors($Proj);
+        echo PrintIRBErrors($Proj);
+    }else{
+        //if is not a reaserch project but you want to go to production anyways
+        echo $research;
+    }
 
-echo PrintIdentifiersErrors($data_dictionary_array);
+    $res_records= PrintTestRecordsErrors();
+    $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 80);
+    $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
+    $res_dates_consistent= PrintDatesConsistentErrors($data_dictionary_array);
+    $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
+    $res_positive_negative_consistent= PrintPositiveNegativeConsistentErrors($data_dictionary_array);
+    $res_identifiers= PrintIdentifiersErrors($data_dictionary_array);
 
 
+    if($res_records or
+        $res_other_or_unknown or
+        $res_branching_logic or
+        $res_dates_consistent or
+        $res_yes_no_consistent or
+        $res_positive_negative_consistent
+        or $res_identifiers) {
 
+        echo $res_records;
+        echo $res_other_or_unknown;
+        echo $res_branching_logic;
+        echo $res_dates_consistent;
+        echo $res_yes_no_consistent;
+        echo $res_positive_negative_consistent;
+        echo $res_identifiers;
+
+    }else{
+        //if all is ok you can go to production!!
+        echo PrintSuccess();
+
+    }
+}
 
 
 
