@@ -19,6 +19,7 @@
 //public $Words = "Other, Unknown, Don't know/Not sure ,Don't know,Not sure, Not Reported, NA, N/A, uninterpretable, otro, otra, no se, Other please specify, not obtained, missing data, do not know or not sure, refused, no response was entered on form despite affirming that the patient was untestable, no response was entered on form despite affirming that the patient was testable, did not provide answer / not answered, other type, unclear, not gradable, other frequency, sent or stored other, none, no data available, unable to examine ";
 //public $Ids= "97,98,99,999,9999,888,8888,-1,777,7777";
 
+//TODO: move the keywords to the language file
     /**
      * @return string
      */
