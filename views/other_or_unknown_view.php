@@ -57,12 +57,12 @@ require_once "../../../redcap_connect.php";
         var table =  $('#other_or_unknown_data_table').DataTable({
 
              "paging":         false,
-
+            "searching": false,
 
             data: dataSet,
             columns: [
-                { title: "Form Name" },
-                { title: "Variable Name" },
+                { title: "Instrument: " },
+                { title: "Variable / Field Name" },
                 { title: "Code" },
                 { title: "Label " },
                 { title: "Edit" }
@@ -86,7 +86,7 @@ require_once "../../../redcap_connect.php";
                 api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                     if ( last !== group ) {
                         $(rows).eq( i ).before(
-                            '<tr class="group"><td colspan="4"><h5><strong>Form: <u>'+group+'</u></strong></h5></td></tr>'
+                            '<tr class="group"><td colspan="4"><h5>Instrument: <strong><u>'+group+'</u></strong></h5></td></tr>'
 
                         );
 
