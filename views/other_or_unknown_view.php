@@ -64,16 +64,17 @@ require_once "../../../redcap_connect.php";
                 { title: "Instrument: " },
                 { title: "Variable / Field Name" },
                 { title: "Code" },
-                { title: "Label " },
+                { title: "Options/Choices" },
                 { title: "Edit" }
             ],
 
             "columnDefs": [
                 { "visible": false, "targets": 0 },
-                {"className": "dt-center", "targets": 2},
-                {"className": "dt-center", "targets": 3},
+                {"className": "dt-left", "targets": 2},
+                {"className": "dt-left", "targets": 3},
+
                 {"className": "dt-center", "targets": 4},
-                { "width": "30px", "targets": 4}
+                { "width": "25px", "targets": 4}
 
             ],
             "order": [[ 0, 'asc' ]],

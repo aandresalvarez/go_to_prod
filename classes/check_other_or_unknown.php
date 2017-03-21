@@ -115,14 +115,14 @@
 
     }
 
-
+// create the table with the choices
     public static function getChoices($array,$variable_name,$to_highlight ){
-        $table='<table  border="1">';
+        $table='<table class="table"  style="width: 50%;" border="1">';
 
         foreach ($array as $list){
             if ($variable_name==$list[1]){
                 if($to_highlight==$list[3]){
-                    $table .='<tr><td class="bg-warning" ><strong>'.$list[2].'</strong></td><td class="bg-warning"><strong>'.$list[3].'</strong></td></tr>';
+                    $table .='<tr><td class="bg-info" style="color: red" ><strong>'.$list[2].'</strong></td><td class="bg-info" style="color: red"><strong>'.$list[3].'</strong></td></tr>';
 
                 }else{
                     $table .='<tr><td>'.$list[2].'</td><td>'.$list[3].'</td></tr>';
@@ -187,9 +187,14 @@
                 }
                      $link_to_edit = '<a href=' . $link_path . ' target="_blank" ><img src=' . APP_PATH_IMAGES .'pencil.png></a>';
                     // Adding : Intrument Name, instrument
-                   // $var1='<strong>'.$list[2].'</strong> , '.$list[3];
-                    array_push( $to_fix_array, Array(REDCap::getInstrumentNames($list[0]),$list[1],$list[2],$list[3],$link_to_edit));
-                   // array_push( $to_fix_array, Array(REDCap::getInstrumentNames($list[0]),$list[1],$list[2],$var1,$link_to_edit));
+
+                $label=$Proj->metadata[$list[1]];
+                $label=$label['element_label'];
+                $label=REDCap::filterHtml ( $label );
+                $label = wordwrap($label, 30, "<br />");
+
+                    array_push( $to_fix_array, Array(REDCap::getInstrumentNames($list[0]),$list[1],$label,$list[3],$link_to_edit));
+
 
             }
         }

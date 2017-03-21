@@ -29,14 +29,20 @@ global $Proj;
 //echo APP_PATH_WEBROOT;
 //echo redcap_info();
 
+
+
 // Warning if project is in production mode
 if ($status == 1)
 {
     echo lang('PRODUCTION_WARNING');
 }
-//echo "<pre>";
- //print_r($Proj);
-// echo "</pre>";
+echo "<pre>";
+$temp=$Proj->metadata['dob'];
+$temp2=$temp['element_label'];
+print_r($temp2);
+//print_r($Proj);
+//print_r(REDCap::getFieldNames('testid'));
+ echo "</pre>";
 ?>
 <link rel="stylesheet" href="styles/go_prod_styles.css">
 
