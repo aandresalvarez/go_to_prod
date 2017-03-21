@@ -8,15 +8,15 @@
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
-echo '<pre>' . print_r($_SESSION["DatesConsistentErrors"], TRUE) . '</pre>';
+//echo '<pre>' . print_r($_SESSION["DatesConsistentErrors"], TRUE) . '</pre>';
 
 
 ?>
-
+<!--
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>-->
 
 
 

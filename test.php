@@ -39,10 +39,10 @@ if ($status == 1)
 // echo "</pre>";
 ?>
 <link rel="stylesheet" href="styles/go_prod_styles.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+
 
 
 
@@ -79,7 +79,7 @@ if ($status == 1)
 
 
     <div id="ResultsModal" class="modal fade">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -126,48 +126,45 @@ if ($status == 1)
 
                     $("#go_prod_tbody").html(result);
                     $('.gp-info-content').css( 'cursor', 'pointer' );
-
                     $('.gp-tr').hover(function(){
                         $(this).css("background","#d9e1f9");
                     },function(){
                         $(this).css("background","");
                     });
                     $('.gp-info-content').children('.gp-body-content').hide();
-
                     // $('.glyphicon-menu-down').hide();
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
                         console.log( "entro al hidden modal" );
                         $(this).children('.gp-body-content').slideToggle();
-
                     });
-
-
                     /* This code load the content of the link in the same modal */
                     $(function() {
                         $('[data-load-remote]').on('click',function(e) {
                             e.preventDefault();
                             var $this = $(this);
                             var remote = $this.data('load-remote');
-                            if (!$this.data('isloaded')) {
+                            /*if (!$this.data('isloaded')) {*/
                                 if(remote) {
                                     $($this.data('remote-target')).load(remote);
+                                    console.log("supuestamente cargo!!!");
                                     $this.data('isloaded', true)
                                 }
-                            }
+                            /*}*/
                         });
+
                     });
-
-
-
-
+                /*this code remove the content from the modal when is closed */
+                    $("#ResultsModal").on('hidden.bs.modal', function (e) {
+                        e.preventDefault();
+                        $(this).removeData('bs.modal');
+                        console.log("ENTRO on hidden!!!");
+                    });
                     $('#go_prod_go_btn').prop("disabled",false);
                     $('#go_prod_go_btn').html('Run again');
-
                     $('#go_prod_go_btn').click(function() {
                         //$("#go_prod_tbody").html('');
                         $('#go_prod_table').hide();
-
                     });
 
                 }});
@@ -175,19 +172,6 @@ if ($status == 1)
 
             console.log( "ready!" );
             //$('#ResultsModal').onHide().removeData('modal');
-           /* $("#ResultsModal").on('hidden.bs.modal', function () {
-                // $(this).data('bs.modal', null);
-
-
-               // $(this).removeData('bs.modal');
-
-
-                // $(this).text('default-label');
-                //$(this).html('');
-
-                console.log("ENTRO!!!");
-            });*/
-
         });
 
     </script>
