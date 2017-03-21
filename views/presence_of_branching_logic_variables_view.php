@@ -20,13 +20,13 @@ require_once "../../../redcap_connect.php";
 
 
 
-<div class="panel panel-default">
+<div class="panel panel-default" width="50%">
     <!-- Default panel contents -->
     <div class="panel-heading"><div class="projhdr"> Branching Logic Not Valid Variables </div>
     </div>
     <div class="panel-body">
     </div>
-    <div style="padding: 1px">
+    <div >
         <table id="presence_of_branching_logic_data_table" class=" display " width="100%" cellspacing="0"></table>
     </div>
     <div class="modal-footer">

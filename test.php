@@ -89,10 +89,7 @@ if ($status == 1)
                 <div class="modal-body">
                     <p>Loading...</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+
 
             </div>
             <!-- /.modal-content -->
@@ -138,11 +135,21 @@ if ($status == 1)
                         console.log( "entro al hidden modal" );
                         $(this).children('.gp-body-content').slideToggle();
                     });
+
+
+                    /*this code remove the content from the modal when is closed */
+                    $("#ResultsModal").on('hidden.bs.modal', function (e) {
+                        e.preventDefault();
+                        //$(this).removeData('bs.modal');
+                        console.log("ENTRO on hidden!!!");
+                    });
+
                     /* This code load the content of the link in the same modal */
                     $(function() {
                         $('[data-load-remote]').on('click',function(e) {
                             e.preventDefault();
                             var $this = $(this);
+                            $("#ResultsModal").removeData('bs.modal');
                             var remote = $this.data('load-remote');
                             /*if (!$this.data('isloaded')) {*/
                                 if(remote) {
@@ -154,12 +161,9 @@ if ($status == 1)
                         });
 
                     });
-                /*this code remove the content from the modal when is closed */
-                    $("#ResultsModal").on('hidden.bs.modal', function (e) {
-                        e.preventDefault();
-                        $(this).removeData('bs.modal');
-                        console.log("ENTRO on hidden!!!");
-                    });
+
+
+
                     $('#go_prod_go_btn').prop("disabled",false);
                     $('#go_prod_go_btn').html('Run again');
                     $('#go_prod_go_btn').click(function() {
