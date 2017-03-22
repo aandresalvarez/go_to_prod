@@ -47,19 +47,19 @@ require_once "../../../redcap_connect.php";
 
             "paging":         false,
 
-
+            "searching": false,
             data: dataSet,
             columns: [
                 { title: "Form Name" },
-                { title: "Variable Name" },
-                { title: "Date Format Long" },
+                { title: "Variable / Field Name" },
+                { title: "Field Label" },
                 { title: "Date Format" },
                 { title: "Edit" }
             ],
 
             "columnDefs": [
                 { "visible": false, "targets": 0 },
-                { "visible": false, "targets": 2 },
+
                 {"className": "dt-center", "targets": 3},
                 {"className": "dt-center", "targets": 4},
                 { "width": "25px", "targets": 4}

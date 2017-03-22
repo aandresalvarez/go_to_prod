@@ -138,7 +138,12 @@ public static function Filter($array, $known_list){
         $FilteredOutList= self::CleanArray($FilteredOutList);
         foreach ($array as $item){
             if (in_array(self::CleanString($item[3]),$FilteredOutList)){
-                array_push($FilteredOut,Array($item[0],$item[1],$item[2],$item[3]));
+
+                $table= self::getChoices($array,$item[1], $item[3]);
+
+
+
+                array_push($FilteredOut,Array($item[0],$item[1],$item[2],$table));
 
             }
 
@@ -149,25 +154,26 @@ return $FilteredOut;
 }
 
 
-//Extract an array with just the Id column
-    /**
-     * @param $array
-     * @param $Word
-     * @return array
-     */
-/*public static function Extract($array, $Word){
+// create the table with the choices and highlight the  inconsistent one
+    public static function getChoices($array,$variable_name,$to_highlight ){
+        $table = '<table id="gp-results-table" class="table table-sm"  style="width:80%; border-color: inherit;" border="1">';
 
-    $Extracted= array();
-    foreach ($array as $item){
-        //echo "$item[3]  <br><br>";
-        if (self::CleanString($item[3])===self::CleanString($Word)){
+        foreach ($array as $list) {
+            if ($variable_name == $list[1]) {
+                if ($to_highlight == $list[3]) {
+                    $table .= '<tr><td class="bg-info" style="color: red" ><strong>' . $list[2] . '</strong></td><td class="bg-info" style="color: red"><strong>' . $list[3] . '</strong></td></tr>';
 
-            array_push($Extracted,$item[2]);
+                } else {
+                    $table .= '<tr><td>' . $list[2] . '</td><td>' . $list[3] . '</td></tr>';
+                }
+
+
+            }
         }
-    }
-    return $Extracted;
-}*/
 
+        return $table .='</table>';
+
+    }
 
 //check if any Id (Yes or No ot Positive/Negative) is different  tho the rest
     /**
@@ -175,6 +181,8 @@ return $FilteredOut;
      * @return array
      */
     public static function FindProblems($array){
+
+        global $Proj;
         $FilteredOut= array();
         foreach ($array as $item1){
             foreach ( $array as $item2){
@@ -186,7 +194,23 @@ return $FilteredOut;
                     $link_to_edit2 = '<a href=' . $link_path2. ' target="_blank" ><img src=' . APP_PATH_IMAGES. 'pencil.png></a>';
                     //array_push($FilteredOut,Array($item1[0],$item1[1],$item1[2],$item1[3]));
 
-                    array_push($FilteredOut,Array($item1[0],$item1[1],$item1[2],$item1[3],$link_to_edit1),Array($item2[0],$item2[1],$item2[2],$item2[3],$link_to_edit2));
+
+                    // Adding : Intrument Name, instrument
+                    //todo:CREATE A FUNCTION INSTEAD
+                    $label1=$Proj->metadata[$item1[1]];
+                    $label1=$label1['element_label'];
+                    $label1=REDCap::filterHtml ( $label1 );
+                    $label1 = wordwrap($label1, 30, "<br />");
+
+
+                    $label2=$Proj->metadata[$item2[1]];
+                    $label2=$label2['element_label'];
+                    $label2=REDCap::filterHtml ( $label2 );
+                    $label2 = wordwrap($label2, 30, "<br />");
+
+
+
+                    array_push($FilteredOut,Array($item1[0],$item1[1],$label1,$item1[3],$link_to_edit1),Array($item2[0],$item2[1],$label2 ,$item2[3],$link_to_edit2));
                     break;
                 }
 

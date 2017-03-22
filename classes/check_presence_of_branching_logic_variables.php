@@ -63,7 +63,7 @@ class check_presence_of_branching_logic_variables
 
 
 
-//TODO: Create an extra Validation Check Array  with the variable names that also are Event names...
+//TODO: Create an extra Validation Check Array  with the variable names that also are Event names... and ask if is intentional
     public static function VariableNamesWithTheSameNameThanAnEventName(){
         // Check if project is longitudinal
         $var = Array();
@@ -115,7 +115,7 @@ class check_presence_of_branching_logic_variables
 
 
     public static function CheckIfBranchingLogicVariablesExist($DataDictionary){
-
+        global $Proj;
 
         $var= array();
         $branching_fields=self::getBranchingLogicFields($DataDictionary);
@@ -126,10 +126,19 @@ class check_presence_of_branching_logic_variables
         foreach ($BranchingLogicArray as $variable){
              if(!in_array($variable[2],$fields)){
 
+
+                 //todo:create a function instead
+                 $label=$Proj->metadata[$variable[1]];
+                 $label=$label['element_label'];
+                 $label=REDCap::filterHtml ( $label );
+                 $label = wordwrap($label, 30, "<br />");
+
+
+
                  $link_path=APP_PATH_WEBROOT.'Design/online_designer.php?pid='.$_GET['pid'].'&page='.$variable[0].'&field='.$variable[1].'&branching=1';
                  $link_to_edit='<a href='.$link_path.' target="_blank" ><img src='.APP_PATH_IMAGES.'arrow_branch_side.png></a>';
 
-                 array_push( $var, Array(REDCap::getInstrumentNames($variable[0]),$variable[1],$variable[2],$link_to_edit));
+                 array_push( $var, Array(REDCap::getInstrumentNames($variable[0]),$variable[1],$label,'<strong style="color: red">['.$variable[2].']</strong>',$link_to_edit));
              }
         }
 

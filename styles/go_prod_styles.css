@@ -1,5 +1,23 @@
+/* RUN main button */
+#go_prod_go_btn {
 
+    border: none !important; /* Remove borders */
+    color: white !important; /* Add a text color */
+    padding: 14px 28px !important; /* Add some padding */
+    cursor: pointer !important; /* Add a pointer cursor on mouse-over */
+}
 
+#go_prod_go_btn:hover {
+    outline: none;
+
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+}
+/*for the data table*/
+#gp-results-table{
+    padding:   25% !important;
+
+}
 
 table.go_prod_table {
 
@@ -26,14 +44,15 @@ table.go_prod_table tr {
 
 }
 
-
+/*modal to load datatable results*/
 .modal {
 
-    padding: 5% !important;
+    padding:  5% 25%  5%  25% !important;
+
     width: auto;
 }
 
-
+/* loading effect*/
 .loader {
     position: absolute;
     left: 30%;
@@ -53,12 +72,7 @@ table.go_prod_table tr {
     100% { transform: rotate(360deg); }
 }
 
-.btn-run {
-    border: none !important; /* Remove borders */
-    color: white !important; /* Add a text color */
-    padding: 14px 28px !important; /* Add some padding */
-    cursor: pointer !important; /* Add a pointer cursor on mouse-over */
-}
+
 
 .icon-flag.logo-icon-success {
     width: 28px;  // 14px * 2

@@ -46,7 +46,11 @@ class check_consistency_for_dates
      * @param $array
      * @return array
      */
-    public static function FindProblems($array){
+
+    // At this point is just showing  two date fields with differetn data format
+    //TODO: May by show all the data fields so may be easy to update all
+    public static function FindDateConsistencyProblems($array){
+        global $Proj;
         $FilteredOut= array();
         foreach ($array as $item1){
             foreach ( $array as $item2){
@@ -59,7 +63,23 @@ class check_consistency_for_dates
                     $link_to_edit2='<a href='.$link_path2.' target="_blank" ><img src='.APP_PATH_IMAGES.'pencil.png></a>';
 
 
-                    array_push($FilteredOut,Array($item1[0],$item1[1],$item1[2],$item1[3],$link_to_edit1),Array($item2[0],$item2[1],$item2[2],$item2[3],$link_to_edit2));
+                    // Adding : Intrument Name, instrument
+                    //todo:CREATE A FUNCTION INSTEAD
+                    $label1=$Proj->metadata[$item1[1]];
+                    $label1=$label1['element_label'];
+                    $label1=REDCap::filterHtml ( $label1 );
+                    $label1 = wordwrap($label1, 30, "<br />");
+
+
+                    $label2=$Proj->metadata[$item2[1]];
+                    $label2=$label2['element_label'];
+                    $label2=REDCap::filterHtml ( $label2 );
+                    $label2 = wordwrap($label2, 30, "<br />");
+
+
+
+
+                    array_push($FilteredOut,Array($item1[0],$item1[1],$label1,'<strong style="color: red">'.$item1[3].'</strong>',$link_to_edit1),Array($item2[0],$item2[1],$label2,'<strong style="color: red">'.$item2[3].'</strong>',$link_to_edit2));
                     break;
                 }
 
@@ -83,7 +103,7 @@ class check_consistency_for_dates
     public static function IsDatesConsistent ($DataDictionary){
 
         $array=self::getDateQuestions($DataDictionary,self::getDateTypes());
-        return self::FindProblems($array);
+        return self::FindDateConsistencyProblems($array);
 
     }
 

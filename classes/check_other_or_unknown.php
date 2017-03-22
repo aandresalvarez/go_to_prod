@@ -117,7 +117,7 @@
 
 // create the table with the choices
     public static function getChoices($array,$variable_name,$to_highlight ){
-        $table='<table class="table"  style="width: 50%;" border="1">';
+        $table='<table id="gp-results-table" class="table table-sm"  style="width:80%; border-color: inherit;" border="1">';
 
         foreach ($array as $list){
             if ($variable_name==$list[1]){
@@ -142,7 +142,7 @@
      * @param $percentage
      * @return array
      *
-     * Generate an Array with just the question whit options that have similarity  to one of the elements of the list of Words (Other, Unknown..)
+     * Generate an Array with just the question whit options that have similarity or are contained  to one of the elements of the list of Words (Other, Unknown..)
      */
     public static function FindOtherOrUnknown($array, $known_list,$percentage ){
 
@@ -150,7 +150,7 @@
         $OtherOrUnknownList = explode(",", $known_list);
         foreach ($array as $list){
             foreach ($OtherOrUnknownList as $Other){
-                if (self::EvaluateSimilarity($list[3],$Other,$percentage)){
+                if (self::EvaluateSimilarity($list[3],$Other,$percentage ) ){   //TODO: check if   substrings should be part of the query or not strpos($list[3],$Other)
 
                     $table= self::getChoices($array,$list[1], $list[3]);
 
@@ -188,6 +188,9 @@
                      $link_to_edit = '<a href=' . $link_path . ' target="_blank" ><img src=' . APP_PATH_IMAGES .'pencil.png></a>';
                     // Adding : Intrument Name, instrument
 
+
+
+                //todo:create a function instead
                 $label=$Proj->metadata[$list[1]];
                 $label=$label['element_label'];
                 $label=REDCap::filterHtml ( $label );

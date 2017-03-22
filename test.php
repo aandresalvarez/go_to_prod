@@ -60,7 +60,7 @@ print_r($temp2);
     <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span><?php echo lang('TITLE');?> </div>
     <div id="main-container">
         <div><p ><?php echo lang('MAIN_TEXT');?></p></div>
-        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary btn-run"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
+        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
         <hr>
         <table  id="go_prod_table" class="table table-striped " >
                 <thead>
@@ -85,12 +85,12 @@ print_r($temp2);
 
 
     <div id="ResultsModal" class="modal fade">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Event</h4>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Event</h4>-->
                 </div>
                 <div class="modal-body">
                     <p>Loading...</p>

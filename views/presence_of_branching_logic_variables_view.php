@@ -9,7 +9,7 @@
 require_once "../../../redcap_connect.php";
 
 
-//echo '<pre>' . print_r($_SESSION["BranchingLogicErrors"], TRUE) . '</pre>';
+ //echo '<pre>' . print_r($_SESSION["BranchingLogicErrors"], TRUE) . '</pre>';
 ?>
 
 <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
@@ -43,12 +43,13 @@ require_once "../../../redcap_connect.php";
         var table =  $('#presence_of_branching_logic_data_table').DataTable({
 
             "paging":         false,
-
+            "searching": false,
 
             data: dataSet,
             columns: [
-                { title: "Form Name" },
-                { title: "Variable Name" },
+                { title: "Instrument" },
+                { title: "Variable / Field Name" },
+                { title: "Field Label" },
                 { title: "Missing Variable" },
                 { title: "Edit" }
             ],
@@ -71,7 +72,7 @@ require_once "../../../redcap_connect.php";
                 api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                     if ( last !== group ) {
                         $(rows).eq( i ).before(
-                            '<tr class="group"><td colspan="4"><h5><strong>Form: <u>'+group+'</u></strong></h5></td></tr>'
+                            '<tr class="group"><td colspan="4"><h5><strong>Instrument: <u>'+group+'</u></strong></h5></td></tr>'
 
                         );
 

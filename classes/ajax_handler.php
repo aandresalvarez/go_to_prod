@@ -287,7 +287,7 @@ if($just_for_fun){
     }
 
     $res_records= PrintTestRecordsErrors();
-    $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 100);
+    $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 100 );
     $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
     $res_dates_consistent= PrintDatesConsistentErrors($data_dictionary_array);
     $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
