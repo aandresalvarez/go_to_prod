@@ -6,10 +6,14 @@
  * Date: 3/9/17
  * Time: 11:38 AM
  */
+
+//TODO: is not working for [type_of_cystoscopy_v2] PID 9748
+
+
 class check_presence_of_branching_logic_variables
 {
 
-    //TODO: Check for  checkboxes automatic extra variables
+
 
     public static function getBranchingLogicFields($DataDictionary){
         $var= array();

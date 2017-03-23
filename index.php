@@ -17,7 +17,7 @@ require_once 'classes/check_user_rights.php';
 
 
 // Check if user can create new records, if not Exit.
-IsProjectAdmin();
+//IsProjectAdmin();
 
 
 
@@ -73,7 +73,10 @@ if ($status == 1)
                 <tbody id="go_prod_tbody">
                 </tbody>
         </table>
+
+
         <div id="gp-loader" ><div  class="loader"></div></div>
+        <div id="gp-loader-extra-time"  ><div class="alert alert-info fade in" role="alert"><?php echo lang('LOADING_EXTRA_TIME');?></div></div>
     </div>
 
 
@@ -89,7 +92,7 @@ if ($status == 1)
 
                 </div>
                 <div class="modal-body">
-                    <p>Loading...</p>
+                    <p><?php echo lang('LOADING');?></p>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -106,22 +109,47 @@ if ($status == 1)
     <script>
 
 
+
+
+
         $( document ).ready(function() {
 
             $('#go_prod_table').hide();
             $('#gp-loader').hide();
+            $('#gp-loader-extra-time').hide();
             $('#go_prod_go_btn').html('Run'); // Show "Downloading..."
             //$('#go_prod_tbody').load("classes/check_main.php?pid=<php echo $_GET['pid']; ?>");
 
             $("#go_prod_go_btn").click(function(){
+
+                //time out in case a big datadictionary
+                var timer = window.setTimeout(function(){
+
+                    $('#gp-loader-extra-time').fadeIn(2000);
+                    //$('.ui-AnotherLoader').show();
+                }, 10000);
+
+
+
+
                 $('#gp-loader').show();
                 $(this).prop("disabled",true);
-                //$(this).hide();
+
+
+
+
+
                 $.ajax({url: "classes/ajax_handler.php?pid=<?php echo $_GET['pid']; ?>", success: function(result){
                     $('#go_prod_table').show();
+
+                    if(timer) {
+                        clearTimeout(timer);
+                        $('#gp-loader-extra-time').hide();
+                    };
                     $('#gp-loader').hide();
 
                     $("#go_prod_tbody").html(result);
+
                     $('.gp-info-content').css( 'cursor', 'pointer' );
                     $('.gp-tr').hover(function(){
                         $(this).css("background","#d9e1f9");
@@ -129,10 +157,22 @@ if ($status == 1)
                         $(this).css("background","");
                     });
                     $('.gp-info-content').children('.gp-body-content').hide();
-                    // $('.glyphicon-menu-down').hide();
+
+
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
-                        console.log( "entro al hidden modal" );
+                        //console.log( "entro al hidden modal" );
+                        var find_plus=$(this).find('.title-text-plus');
+
+                         console.log( find_plus );
+                        if (find_plus.text() == '(+)')
+                            find_plus.text('(-)');
+                        else
+                            find_plus.text('(+)');
+
+
+
+
                         $(this).children('.gp-body-content').slideToggle();
                     });
 
@@ -149,7 +189,7 @@ if ($status == 1)
                         $('[data-load-remote]').on('click',function(e) {
                             e.preventDefault();
                             var $this = $(this);
-                            $("#ResultsModal").removeData('bs.modal');
+                            //$("#ResultsModal").removeData('bs.modal');
                             var remote = $this.data('load-remote');
                             /*if (!$this.data('isloaded')) {*/
                                 if(remote) {

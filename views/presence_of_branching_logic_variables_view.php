@@ -9,7 +9,7 @@
 require_once "../../../redcap_connect.php";
 
 
- //echo '<pre>' . print_r($_SESSION["BranchingLogicErrors"], TRUE) . '</pre>';
+  //echo '<pre>' . print_r($_SESSION["BranchingLogicErrors"], TRUE) . '</pre>';
 ?>
 
 <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">

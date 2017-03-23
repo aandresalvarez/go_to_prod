@@ -23,7 +23,7 @@ class check_number_of_fields_by_form
 
 
 
- public static  function getNumberOfFieldsByForm ($DataDictionary){
+    public static  function getNumberOfFieldsByForm ($DataDictionary){
         $var = array();
         // Print out the names of all instruments in the project
         $instrument_names = REDCap::getInstrumentNames();
@@ -44,7 +44,7 @@ class check_number_of_fields_by_form
     }
 
 
-public static function getFormsWithToManyFields($maximum_recommended){
+    public static function getFormsWithToManyFields($maximum_recommended){
         $var = array();
         //Call the Data Dictionary
         $dd_array = REDCap::getDataDictionary('array');

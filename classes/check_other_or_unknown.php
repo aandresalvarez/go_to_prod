@@ -20,6 +20,8 @@
 //public $Ids= "97,98,99,999,9999,888,8888,-1,777,7777";
 
 //TODO: move the keywords to the language file
+
+//TODO: check mix of numbers and strings  in codes  For example: 1,cat|2, dog| 3, mouse| NA, different animal
     /**
      * @return string
      */
@@ -32,7 +34,7 @@
      * @return string
      */
     public static function getIDs(){
-        $var="97,98,99,999,9999,888,8888,-1,777,7777";
+        $var="97,88,98,99,999,9999,888,8888,-1,777,7777";
         return $var;
     }
 
@@ -48,7 +50,7 @@
         // Loop through each field and do something with each
 		foreach ($DataDictionary as $field_name=>$field_attributes){
     			// Do something with this field if it is a checkbox field
-    			if ($field_attributes['field_type'] == "checkbox"   || $field_attributes['field_type'] == "radio"  || $field_attributes['field_type'] == "dropdown") {
+    			if ($field_attributes['field_type'] == "checkbox" || $field_attributes['field_type'] == "radio" || $field_attributes['field_type'] == "dropdown") {
                     $FormName = $field_attributes['form_name'];
                     $FieldName = $field_attributes['field_name'];                      
                     $Choices = $field_attributes['select_choices_or_calculations']; 
@@ -115,6 +117,28 @@
 
     }
 
+    //calculate if the distance of the codes  is > 0 ::: in case if coding using integers integers
+    function CodeDistancesBiggerThanZero($array){
+       // $difference = 0;
+        $codes=array();
+        //extract just the keys
+        foreach( $array as $key => $value ){
+             array_push($codes,$key);
+        }
+        asort($codes); //sort the array
+
+        $length = count($codes);
+        if ($length  == 0) return 0;
+
+        for ($i=1; $i < $length; $i++){
+            $difference = abs($codes[$i] - $codes[$i-1]);
+            if($difference>1){
+                return true;
+            }
+        }
+        return false;
+    }
+
 // create the table with the choices
     public static function getChoices($array,$variable_name,$to_highlight ){
         $table='<table id="gp-results-table" class="table table-sm"  style="width:80%; border-color: inherit;" border="1">';
@@ -142,7 +166,7 @@
      * @param $percentage
      * @return array
      *
-     * Generate an Array with just the question whit options that have similarity or are contained  to one of the elements of the list of Words (Other, Unknown..)
+     * Generate an Array with just the question with options that have similarity or are contained  to one of the elements of the list of Words (Other, Unknown..)
      */
     public static function FindOtherOrUnknown($array, $known_list,$percentage ){
 

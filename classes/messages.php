@@ -54,7 +54,9 @@
             'EDIT' => 'Edit',
             'PROJECT_SETUP' => 'Project Setup',
             'PROJECT_GO_PROD' => 'Project Setup',
-            'USER_RIGHTS' => ' Sorry '.USERID.', just users who CAN edit this project are allowed to run this plugin.',
+            'USER_RIGHTS' => ' Sorry , just users who CAN edit this project are allowed to run this plugin.',
+            'LOADING' => 'Loading...',
+            'LOADING_EXTRA_TIME' => '<strong>Wow! What a large database!</strong><br> - It will take some extra time while all the Data Dictionary is analyzed. Please be patient :)',
 
             'PRODUCTION_WARNING' => '<div class="alert alert-warning"><strong>Warning!</strong> This plugin may not work as is expected in <strong style=\'color: green\'>Production</strong> mode. For better results move back to <strong>Development</strong> mode.</div>',
             'TITLE' => 'Go to Production mode Check List',

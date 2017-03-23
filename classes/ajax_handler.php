@@ -52,18 +52,18 @@ function PrintTr($title_text,$body_text,$span_label,$a_tag){
             <td class="gp-info-content">
                 <div class="gp-title-content">
                     <strong>
-                        '.$title_text.'
+                        '.$title_text.' <span class="title-text-plus" style="color: #2E6DA3"><small>(+)</small></span>
                     </strong>
                 </div>
                     
                 <div class="gp-body-content">
                     <p>
-                        '.$body_text.'
+                        '.$body_text.' 
                     </p>
                 </div>
             </td>
             <td>               
-                    '.$span_label.'
+                    '.$span_label.' 
             </td>
             <td>               
                    '.$a_tag.'
@@ -216,7 +216,7 @@ function PrintResearchErrors($proj){
         //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(lang('RESEARCH_PROJECT_TITLE'),lang('RESEARCH_PROJECT_BODY'),$span,$a);
 
-    }else return true;
+    }else return false;
 
 
 }
@@ -242,9 +242,9 @@ function PrintJustForFunErrors($proj){
 function PrintTestRecordsErrors(){
     include_once "check_test_records.php";
     $res= new check_test_records();
-
+    global $Proj;
     $array=$res::CheckTestRecordsAndExports();
-    if (!empty($array)){
+    if (!empty($array) and $Proj->project['status']==0){
        // $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $a= '<u>Exports:</u>'.$array[0].'<br><u> Records: </u>'.$array[1];
 
@@ -255,6 +255,21 @@ function PrintTestRecordsErrors(){
     }else return false;
 
 
+
+}
+
+function PrintNumberOfFieldsInForms(){
+    include_once 'check_number_of_fields_by_form.php';
+    $res= new check_number_of_fields_by_form();
+    $array=$res::getFormsWithToManyFields(30);
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_yes_no_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
+        //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $_SESSION["YesNoConsistentErrors"]= $array;
+        return PrintTr(lang('YES_NO_TITLE'),lang('YES_NO_BODY'),$span,$a);
+
+    }else return false;
 
 }
 
@@ -275,14 +290,13 @@ if($just_for_fun){
     echo $just_for_fun;
 }else{
 
-    //IS is a research project ask for PI and IRB
+    //if is a research project ask for PI and IRB
     $research=PrintResearchErrors($Proj);
-    if($research){
-
+    if(!$research){
         echo PrintPIErrors($Proj);
         echo PrintIRBErrors($Proj);
     }else{
-        //if is not a reaserch project but you want to go to production anyways
+        //if is not a research project but you want to go to production anyways
         echo $research;
     }
 
