@@ -5,7 +5,7 @@
  * Date: 3/17/17
  * Time: 12:45 AM
  */
-
+// large proj for testing 5749
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../redcap_connect.php";
 
@@ -36,6 +36,10 @@ if ($status == 1)
 {
     echo lang('PRODUCTION_WARNING');
 }
+
+
+$data_dictionary_array = REDCap::getDataDictionary('array');
+
 
 ?>
 <link rel="stylesheet" href="styles/go_prod_styles.css">
@@ -117,8 +121,7 @@ if ($status == 1)
             $('#go_prod_table').hide();
             $('#gp-loader').hide();
             $('#gp-loader-extra-time').hide();
-            $('#go_prod_go_btn').html('Run'); // Show "Downloading..."
-            //$('#go_prod_tbody').load("classes/check_main.php?pid=<php echo $_GET['pid']; ?>");
+            $('#go_prod_go_btn').html('Run');
 
             $("#go_prod_go_btn").click(function(){
 
@@ -126,18 +129,13 @@ if ($status == 1)
                 var timer = window.setTimeout(function(){
 
                     $('#gp-loader-extra-time').fadeIn(2000);
-                    //$('.ui-AnotherLoader').show();
-                }, 10000);
 
+                }, 10000);
 
 
 
                 $('#gp-loader').show();
                 $(this).prop("disabled",true);
-
-
-
-
 
                 $.ajax({url: "classes/ajax_handler.php?pid=<?php echo $_GET['pid']; ?>", success: function(result){
                     $('#go_prod_table').show();
@@ -161,16 +159,14 @@ if ($status == 1)
 
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
-                        //console.log( "entro al hidden modal" );
+
                         var find_plus=$(this).find('.title-text-plus');
 
-                         console.log( find_plus );
+                         //console.log( find_plus );
                         if (find_plus.text() == '(+)')
                             find_plus.text('(-)');
                         else
                             find_plus.text('(+)');
-
-
 
 
                         $(this).children('.gp-body-content').slideToggle();
@@ -180,8 +176,7 @@ if ($status == 1)
                     /*this code remove the content from the modal when is closed */
                     $("#ResultsModal").on('hidden.bs.modal', function (e) {
                         e.preventDefault();
-                        //$(this).removeData('bs.modal');
-                        console.log("ENTRO on hidden!!!");
+
                     });
 
                     /* This code load the content of the link in the same modal */
@@ -189,15 +184,15 @@ if ($status == 1)
                         $('[data-load-remote]').on('click',function(e) {
                             e.preventDefault();
                             var $this = $(this);
-                            //$("#ResultsModal").removeData('bs.modal');
+
                             var remote = $this.data('load-remote');
-                            /*if (!$this.data('isloaded')) {*/
+
                                 if(remote) {
                                     $($this.data('remote-target')).load(remote);
-                                    console.log("supuestamente cargo!!!");
+
                                     $this.data('isloaded', true)
                                 }
-                            /*}*/
+
                         });
 
                     });
@@ -207,7 +202,7 @@ if ($status == 1)
                     $('#go_prod_go_btn').prop("disabled",false);
                     $('#go_prod_go_btn').html('Run again');
                     $('#go_prod_go_btn').click(function() {
-                        //$("#go_prod_tbody").html('');
+
                         $('#go_prod_table').hide();
                     });
 
@@ -215,7 +210,7 @@ if ($status == 1)
             });
 
             console.log( "ready!" );
-            //$('#ResultsModal').onHide().removeData('modal');
+
         });
 
     </script>

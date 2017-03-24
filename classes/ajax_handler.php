@@ -212,7 +212,7 @@ function PrintResearchErrors($proj){
     if (!$research_found){
         $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
         //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
-        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $span='<span class="label label-info">'.lang('INFO').'</span>';
         //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(lang('RESEARCH_PROJECT_TITLE'),lang('RESEARCH_PROJECT_BODY'),$span,$a);
 
@@ -258,20 +258,44 @@ function PrintTestRecordsErrors(){
 
 }
 
-function PrintNumberOfFieldsInForms(){
+function PrintNumberOfFieldsInForms($DataDictionary,$max_recommended){
     include_once 'check_number_of_fields_by_form.php';
     $res= new check_number_of_fields_by_form();
-    $array=$res::getFormsWithToManyFields(30);
+    $array=$res::getFormsWithToManyFields($DataDictionary,$max_recommended);
     if (!empty($array)){
-        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_yes_no_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/number_of_fields_by_form_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
         //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
-        $_SESSION["YesNoConsistentErrors"]= $array;
-        return PrintTr(lang('YES_NO_TITLE'),lang('YES_NO_BODY'),$span,$a);
+        $_SESSION["NumberOfFieldsByForm"]= $array;
+        return PrintTr(lang('MAX_NUMBER_OF_RECORDS_TITLE'),lang('MAX_NUMBER_OF_RECORDS_BODY'),$span,$a);
 
     }else return false;
 
 }
+
+function PrintValidatedFields($DataDictionary,$min_percentage){
+    include_once 'check_field_validation.php';
+    $res= new check_field_validation();
+    $array=$res::getMinimumOfValidatedFields($DataDictionary,$min_percentage);
+
+    if (!empty($array)){
+        //$a='<a  target="_blank" href="https://medwiki.stanford.edu/display/redcap/Text+Box+Field+Validation" >' .lang('WIKI').$number.'</a>';
+        $a= '<u>'.lang('VALIDATED_FIELDS').'</u>'.$array[0].'<br><u>'.lang('TEXT_BOX_FIELDS').'</u>'.$array[1];
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        return PrintTr(lang('NUMBER_VALIDATED_RECORDS_TITLE'),lang('NUMBER_VALIDATED_RECORDS_BODY'),$span,$a);
+
+    }else{
+
+        return false;
+    }
+
+}
+
+
+
+
+
+
 
 function PrintSuccess(){
 //TODO: send directly to move to production screen
@@ -295,9 +319,14 @@ if($just_for_fun){
     if(!$research){
         echo PrintPIErrors($Proj);
         echo PrintIRBErrors($Proj);
+
+
+
     }else{
         //if is not a research project but you want to go to production anyways
         echo $research;
+
+
     }
 
     $res_records= PrintTestRecordsErrors();
@@ -307,6 +336,8 @@ if($just_for_fun){
     $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
     $res_positive_negative_consistent= PrintPositiveNegativeConsistentErrors($data_dictionary_array);
     $res_identifiers= PrintIdentifiersErrors($data_dictionary_array);
+    $res_number_of_fields_by_form=PrintNumberOfFieldsInForms($data_dictionary_array,30);
+    $res_validated_fields=PrintValidatedFields($data_dictionary_array, 0.05);
 
 
     if($res_records or
@@ -322,14 +353,19 @@ if($just_for_fun){
         echo $res_branching_logic;
         echo $res_dates_consistent;
         echo $res_yes_no_consistent;
+        echo $res_validated_fields;
         echo $res_positive_negative_consistent;
         echo $res_identifiers;
+        echo $res_number_of_fields_by_form;
+
 
     }else{
         //if all is ok you can go to production!!
         echo PrintSuccess();
 
     }
+
+
 }
 
 

@@ -1,14 +1,18 @@
 <?php
 /**
- * LANGUAJE FILE
- * Just here you can change the text content of the plugin
+ * LANGUAGE FILE
+ *  here you can change the text content of the plugin
  *
  */
 //Validation Labels
 
 
     //TODO: Improve the styles  creating a css file.
-    function lang($phrase){
+/**
+ * @param $phrase
+ * @return mixed
+ */
+function lang($phrase){
         static $lang = array(
             'OTHER_OR_UNKNOWN_TITLE' => 'Incorrect Coding of "Other" and "Unknown" values in drop-down lists, radio-buttons or check-boxes.',
             'OTHER_OR_UNKNOWN_BODY' =>'It is common to include an \'other\' or \'unknown\' option at the end of a dropdown list. It is encouraged to use different coding for these answers for two reasons (in general Other=99 and unknown=98). <p>You can easily add additional choices without needing to recode your values When you are using statistical software it is apparent which values correspond to special codes, For example, the following is NOT recommended: </p><ul class="list-group" style=" padding-left: 50px; width: 250px; "><li class="list-group-item">1, Dr. Jones</li><li class="list-group-item">2, Dr. Parker </li><li class="list-group-item">3, Dr. Smith</li><li class="list-group-item">4, Other </li></ul><p>Say you have collected data for 100 records and you now want to add Dr. Rose to the list. A common mistake is the following: </p><ul class="list-group" style=" padding-left: 50px; width: 250px; "><li class="list-group-item">1, Dr. Jones</li><li class="list-group-item">2, Dr. Parker </li><li class="list-group-item">3, Dr. Smith</li><li class="list-group-item">4, Dr. Rose <strong>(DON\'T DO IT THIS WAY)</strong></li><li class="list-group-item">5, Other</li></ul><p>If, before the change, you had 20 records as \'other\' with a value of 4, they would all instantly be transferred to Dr. Rose. This usually isn\'t what is intended. A better design is something like: </p><ul class="list-group" style=" padding-left: 50px; width: 250px; "><li class="list-group-item">1, Dr. Jones</li><li class="list-group-item">2, Dr. Parker </li><li class="list-group-item">3, Dr. Smith</li><li class="list-group-item">99, Other</li></ul><p>Now you can add additional members to the list during the project without needing to recode. And, when you analyze your data the other value is easily identified.</p>',
@@ -47,15 +51,27 @@
             'READY_TO_GO_TITLE' => ' You are all set!. ',
             'READY_TO_GO_BODY' => 'Looks like you are ready to move this project to Production mode!.',
 
+            'NUMBER_VALIDATED_RECORDS_TITLE' => 'Very few validated text fields.',
+            'NUMBER_VALIDATED_RECORDS_BODY' => 'Data Field Validation helps ensure the integrity of your collected data.  Every form designer is strongly encouraged to take advantage of this REDCap functionality in order to discover errors during the data entry process and resolve these errors before they are saved to the database. Field Validation only applies when the Field Type is a Text Box (Short Text).',
+
+            'MAX_NUMBER_OF_RECORDS_TITLE' => 'Forms with more fields than the recommended ones',
+            'MAX_NUMBER_OF_RECORDS_BODY' => 'It is recommended that each form has a maximum of<strong> 30 fields</strong> to optimize its performance, however it is okay to have more fields if necessary.',
+
             'WARNING' => 'Warning',
             'DANGER' => 'Danger',
+            'INFO' => 'Info',
             'SUCCESS' => 'Success',
-            'VIEW' => 'View Details',
+            'VIEW' => 'Details',
             'EDIT' => 'Edit',
             'PROJECT_SETUP' => 'Project Setup',
             'PROJECT_GO_PROD' => 'Project Setup',
-            'USER_RIGHTS' => ' Sorry , just users who CAN edit this project are allowed to run this plugin.',
+            'USER_RIGHTS' => 'Sorry , just users who CAN edit this project are allowed to run this plugin.',
             'LOADING' => 'Loading...',
+            'WIKI' => 'Wiki Page',
+
+
+            'VALIDATED_FIELDS' => 'Validated Fields:',
+            'TEXT_BOX_FIELDS' => 'Text Box Fields:',
             'LOADING_EXTRA_TIME' => '<strong>Wow! What a large database!</strong><br> - It will take some extra time while all the Data Dictionary is analyzed. Please be patient :)',
 
             'PRODUCTION_WARNING' => '<div class="alert alert-warning"><strong>Warning!</strong> This plugin may not work as is expected in <strong style=\'color: green\'>Production</strong> mode. For better results move back to <strong>Development</strong> mode.</div>',
@@ -69,4 +85,3 @@
 
 
 
-//}
