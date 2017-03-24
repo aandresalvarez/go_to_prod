@@ -8,7 +8,7 @@
  */
 
 //TODO: is not working for [type_of_cystoscopy_v2] PID 9748
-
+include_once 'utilities.php';
 
 class check_presence_of_branching_logic_variables
 {
@@ -131,12 +131,8 @@ class check_presence_of_branching_logic_variables
              if(!in_array($variable[2],$fields)){
 
 
-                 //todo:create a function instead
-                 $label=$Proj->metadata[$variable[1]];
-                 $label=$label['element_label'];
-                 $label=REDCap::filterHtml ( $label );
-                 $label = wordwrap($label, 30, "<br />");
 
+                 $label=TextBreak($variable[1]);
 
 
                  $link_path=APP_PATH_WEBROOT.'Design/online_designer.php?pid='.$_GET['pid'].'&page='.$variable[0].'&field='.$variable[1].'&branching=1';

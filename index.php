@@ -13,14 +13,10 @@ require_once "../../redcap_connect.php";
 // OPTIONAL: Display the project header
 require_once APP_PATH_DOCROOT . 'ProjectGeneral/header.php';
 require_once 'classes/messages.php';
-require_once 'classes/check_user_rights.php';
-
+require_once 'classes/utilities.php';
 
 // Check if user can create new records, if not Exit.
 //IsProjectAdmin();
-
-
-
 
 //project information
 global $Proj;
@@ -28,8 +24,6 @@ global $Proj;
 //echo $_SERVER['DOCUMENT_ROOT'];
 //echo APP_PATH_WEBROOT;
 //echo redcap_info();
-
-
 
 // Warning if project is in production mode
 if ($status == 1)
@@ -45,41 +39,25 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 <link rel="stylesheet" href="styles/go_prod_styles.css">
 
 
-
-
-
-
-
-
-
-
-
-
     <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span><?php echo lang('TITLE');?> </div>
     <div id="main-container">
-
         <div><p ><?php echo lang('MAIN_TEXT');?></p></div>
-
-        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
-
+        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <?php echo lang('LOADING');?></button>
         <hr>
-
-        <table  id="go_prod_table" class="table table-striped " >
+        <table  id="go_prod_table" class="table table-striped" >
                 <thead>
                 <tr>
                     <th><strong></strong></th>
-                    <th><strong>Validation</strong></th>
-                    <th><strong>Result</strong></th>
-                    <th><strong>Options</strong></th>
+                    <th><strong><?php echo lang('VALIDATION');?> </strong></th>
+                    <th><strong><?php echo lang('RESULT');?></strong></th>
+                    <th><strong><?php echo lang('OPTIONS');?></strong></th>
                 </tr>
                 </thead>
-            <!--INITIAL RESULTS ARE LOADED HERE-->
+                                 <!--INITIAL RESULTS ARE LOADED HERE-->
                 <tbody id="go_prod_tbody">
                 </tbody>
         </table>
-
-
-        <div id="gp-loader" ><div  class="loader"></div></div>
+         <div id="gp-loader" ><div  class="loader"></div></div>
         <div id="gp-loader-extra-time"  ><div class="alert alert-info fade in" role="alert"><?php echo lang('LOADING_EXTRA_TIME');?></div></div>
     </div>
 
@@ -91,9 +69,7 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
     <div id="ResultsModal" class="modal fade">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
-
                 <div class="modal-header">
-
                 </div>
                 <div class="modal-body">
                     <p><?php echo lang('LOADING');?></p>
@@ -105,34 +81,21 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
     </div>
     <!-- Event modal -->
 
-
-
-
-
-
     <script>
 
 
-
-
+         $('#go_prod_table').hide();
+         $('#gp-loader').hide();
+         $('#gp-loader-extra-time').hide();
 
         $( document ).ready(function() {
 
-            $('#go_prod_table').hide();
-            $('#gp-loader').hide();
-            $('#gp-loader-extra-time').hide();
             $('#go_prod_go_btn').html('Run');
-
             $("#go_prod_go_btn").click(function(){
-
                 //time out in case a big datadictionary
                 var timer = window.setTimeout(function(){
-
                     $('#gp-loader-extra-time').fadeIn(2000);
-
                 }, 10000);
-
-
 
                 $('#gp-loader').show();
                 $(this).prop("disabled",true);
@@ -156,27 +119,20 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
                     });
                     $('.gp-info-content').children('.gp-body-content').hide();
 
-
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
-
                         var find_plus=$(this).find('.title-text-plus');
-
                          //console.log( find_plus );
                         if (find_plus.text() == '(+)')
                             find_plus.text('(-)');
                         else
                             find_plus.text('(+)');
-
-
                         $(this).children('.gp-body-content').slideToggle();
                     });
-
 
                     /*this code remove the content from the modal when is closed */
                     $("#ResultsModal").on('hidden.bs.modal', function (e) {
                         e.preventDefault();
-
                     });
 
                     /* This code load the content of the link in the same modal */
@@ -184,25 +140,19 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
                         $('[data-load-remote]').on('click',function(e) {
                             e.preventDefault();
                             var $this = $(this);
-
                             var remote = $this.data('load-remote');
-
                                 if(remote) {
                                     $($this.data('remote-target')).load(remote);
-
                                     $this.data('isloaded', true)
                                 }
-
                         });
 
                     });
 
-
-
                     $('#go_prod_go_btn').prop("disabled",false);
                     $('#go_prod_go_btn').html('Run again');
-                    $('#go_prod_go_btn').click(function() {
 
+                    $('#go_prod_go_btn').click(function() {
                         $('#go_prod_table').hide();
                     });
 

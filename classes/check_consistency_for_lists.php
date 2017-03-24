@@ -10,6 +10,8 @@
  *
  */
 
+include_once 'utilities.php';
+
 // TODO: ADD veriffication Numbers without labels  0,__ 1,__
 class check_consistency_for_lists //check_consistency_for_lists
 {
@@ -196,17 +198,8 @@ return $FilteredOut;
 
 
                     // Adding : Intrument Name, instrument
-                    //todo:CREATE A FUNCTION INSTEAD
-                    $label1=$Proj->metadata[$item1[1]];
-                    $label1=$label1['element_label'];
-                    $label1=REDCap::filterHtml ( $label1 );
-                    $label1 = wordwrap($label1, 30, "<br />");
-
-
-                    $label2=$Proj->metadata[$item2[1]];
-                    $label2=$label2['element_label'];
-                    $label2=REDCap::filterHtml ( $label2 );
-                    $label2 = wordwrap($label2, 30, "<br />");
+                    $label1=TextBreak($item1[1]);
+                    $label2=TextBreak($item2[1]);
 
 
 

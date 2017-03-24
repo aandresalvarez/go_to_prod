@@ -8,9 +8,6 @@
  */
 
 
-    //TODO: All classes
-
-
 // Find path to redcap_connect.php
 function findRedcapConnect()
 {
@@ -26,9 +23,6 @@ function findRedcapConnect()
 }
 
 
-
-
-
 // Call the REDCap Connect file in the main "redcap" directory
 require_once findRedcapConnect();
 
@@ -37,7 +31,6 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 global $Proj;
 
 require  'messages.php';
-
 
 
 function PrintTr($title_text,$body_text,$span_label,$a_tag){
@@ -292,20 +285,13 @@ function PrintValidatedFields($DataDictionary,$min_percentage){
 }
 
 
-
-
-
-
-
 function PrintSuccess(){
 //TODO: send directly to move to production screen
     $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
     $span='<span class="label label-success">'.lang('SUCCESS').'</span>';
     return PrintTr(lang('READY_TO_GO_TITLE'),lang('READY_TO_GO_BODY'),$span,$a);
 
-
 }
-
 
 
 //IF is Jus for fun do not check anything ,Just for fun project do not go to production
@@ -362,9 +348,7 @@ if($just_for_fun){
     }else{
         //if all is ok you can go to production!!
         echo PrintSuccess();
-
     }
-
 
 }
 

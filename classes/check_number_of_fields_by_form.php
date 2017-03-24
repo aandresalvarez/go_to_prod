@@ -21,8 +21,6 @@ class check_number_of_fields_by_form
 
 
 
-
-
     public static  function getNumberOfFieldsByForm ($DataDictionary){
         $var = array();
         // Print out the names of all instruments in the project

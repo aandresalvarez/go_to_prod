@@ -68,6 +68,9 @@ function lang($phrase){
             'USER_RIGHTS' => 'Sorry , just users who CAN edit this project are allowed to run this plugin.',
             'LOADING' => 'Loading...',
             'WIKI' => 'Wiki Page',
+            'VALIDATION' => 'Validation',
+            'RESULT' => 'Result',
+            'OPTIONS' => 'Options',
 
 
             'VALIDATED_FIELDS' => 'Validated Fields:',

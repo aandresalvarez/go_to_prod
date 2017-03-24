@@ -8,7 +8,7 @@
  */
 class check_longitudinal_not_designated_forms
 {
- //TODO: in a longitudinal project: check and list of the forms not designated fot events.
-//global $Proj;
-//$test=$Proj->getEventsFormDesignated('basic_demography_form'); ???
+ //TODO: in a longitudinal project: check and list of the forms not designated for events.
+ //global $Proj;
+ //$test=$Proj->getEventsFormDesignated('basic_demography_form'); ???
 }

@@ -30,3 +30,16 @@ include_once 'messages.php';
 
 
 }
+
+function TextBreak($question_variable){
+    global $Proj;
+    // Adding : Intrument Name, instrument
+
+    $label1=$Proj->metadata[$question_variable];
+    $label1=$label1['element_label'];
+    $label1=REDCap::filterHtml ( $label1 );
+    $label1 = wordwrap($label1, 30, "<br />");
+
+return $label1;
+}
+

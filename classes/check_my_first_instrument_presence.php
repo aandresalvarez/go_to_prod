@@ -8,5 +8,5 @@
  */
 class check_my_first_instrument_presence
 {
-//todo: check if still exist a fom named :: My First Instrument
+//todo: check if still exist a form named :: My First Instrument
 }

@@ -9,6 +9,7 @@
  * //	Different date formats (i.e, mix of mdy and ymd) – validate consistently across all dates.
 
  */
+include_once 'utilities.php';
 class check_consistency_for_dates
 {
 
@@ -48,7 +49,7 @@ class check_consistency_for_dates
      */
 
     // At this point is just showing  two date fields with differetn data format
-    //TODO: May by show all the data fields so may be easy to update all
+    //TODO: Mayby show all the data fields so maybe easier to update all
     public static function FindDateConsistencyProblems($array){
         global $Proj;
         $FilteredOut= array();
@@ -63,19 +64,10 @@ class check_consistency_for_dates
                     $link_to_edit2='<a href='.$link_path2.' target="_blank" ><img src='.APP_PATH_IMAGES.'pencil.png></a>';
 
 
-                    // Adding : Intrument Name, instrument
-                    //todo:CREATE A FUNCTION INSTEAD
-                    $label1=$Proj->metadata[$item1[1]];
-                    $label1=$label1['element_label'];
-                    $label1=REDCap::filterHtml ( $label1 );
-                    $label1 = wordwrap($label1, 30, "<br />");
 
 
-                    $label2=$Proj->metadata[$item2[1]];
-                    $label2=$label2['element_label'];
-                    $label2=REDCap::filterHtml ( $label2 );
-                    $label2 = wordwrap($label2, 30, "<br />");
-
+                     $label1=TextBreak($item1[1]);
+                     $label2=TextBreak($item2[1]);
 
 
 

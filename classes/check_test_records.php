@@ -9,7 +9,7 @@
 // connect to the REDCap database
  //require_once '../../../redcap_connect.php';
 
-//NOTICE: when the project is moved to production mde the Survey Responses and created records  are deleted
+//NOTICE: when the project is moved to production made the Survey Responses and created records are deleted
 
 class check_test_records
 {

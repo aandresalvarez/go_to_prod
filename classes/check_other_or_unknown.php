@@ -8,7 +8,7 @@
 
 // Call the REDCap Connect file in the main "redcap" directory
 //require_once "../../../redcap_connect.php";
-
+require_once 'utilities.php';
  class check_other_or_unknown {
 
 // Get the data dictionary for the current project in array format
@@ -37,7 +37,6 @@
         $var="97,88,98,99,999,9999,888,8888,-1,777,7777";
         return $var;
     }
-
 
 
     /**
@@ -214,11 +213,10 @@
 
 
 
-                //todo:create a function instead
-                $label=$Proj->metadata[$list[1]];
-                $label=$label['element_label'];
-                $label=REDCap::filterHtml ( $label );
-                $label = wordwrap($label, 30, "<br />");
+
+
+                $label=TextBreak($list[1]);
+
 
                     array_push( $to_fix_array, Array(REDCap::getInstrumentNames($list[0]),$list[1],$label,$list[3],$link_to_edit));
 

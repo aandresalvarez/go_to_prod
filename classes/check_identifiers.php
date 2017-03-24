@@ -8,8 +8,6 @@
  */
 class check_identifiers
 {
-
-
     /**
      * @param $DataDictionary
      * @return bool - True if there is at least one variable set as Identifier

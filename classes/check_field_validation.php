@@ -8,8 +8,7 @@
  */
 class check_field_validation
 {
-//TODO:https://medwiki.stanford.edu/display/redcap/Text+Box+Field+Validation   if the # of fields without validation in less than X% (5%)
-///// not validated yet
+
     public static function getMinimumOfValidatedFields($DataDictionary,$min_percentage){
        // $var= array();
         $count_validated_fields=0;
@@ -30,7 +29,7 @@ class check_field_validation
         }
 
      return ($count_validated_fields/$count_fields) < $min_percentage ?  Array($count_validated_fields,$count_fields ): false;
-    //return $count_validated_fields < $min_percentage ? true : false;
+
     }
 
 
