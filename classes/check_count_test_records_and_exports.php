@@ -11,7 +11,7 @@
 
 //NOTICE: when the project is moved to production made the Survey Responses and created records are deleted
 
-class check_test_records
+class check_count_test_recordsAndexports
 {
 
 

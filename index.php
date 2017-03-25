@@ -48,9 +48,9 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
                 <thead>
                 <tr>
                     <th><strong></strong></th>
-                    <th><strong><?php echo lang('VALIDATION');?> </strong></th>
-                    <th><strong><?php echo lang('RESULT');?></strong></th>
-                    <th><strong><?php echo lang('OPTIONS');?></strong></th>
+                    <th><h4><?php echo lang('VALIDATION');?> </h4></th>
+                    <th><h4><?php echo lang('RESULT');?></h4></th>
+                    <th><h4><?php echo lang('OPTIONS');?></h4></th>
                 </tr>
                 </thead>
                                  <!--INITIAL RESULTS ARE LOADED HERE-->

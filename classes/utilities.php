@@ -43,3 +43,16 @@ function TextBreak($question_variable){
 return $label1;
 }
 
+// Find path to redcap_connect.php
+function findRedcapConnect()
+{
+    $dir = __DIR__;
+    while ( !file_exists( $dir . "/redcap_connect.php" ) ) {
+        if ($dir == dirname($dir)) {
+            throw new Exception("Unable to locate redcap_connect.php");
+        } else {
+            $dir = dirname($dir);
+        }
+    }
+    return $dir . "/redcap_connect.php";
+}

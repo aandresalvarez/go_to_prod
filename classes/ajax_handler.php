@@ -8,21 +8,8 @@
  */
 
 
-// Find path to redcap_connect.php
-function findRedcapConnect()
-{
-    $dir = __DIR__;
-    while ( !file_exists( $dir . "/redcap_connect.php" ) ) {
-        if ($dir == dirname($dir)) {
-            throw new Exception("Unable to locate redcap_connect.php");
-        } else {
-            $dir = dirname($dir);
-        }
-    }
-    return $dir . "/redcap_connect.php";
-}
 
-
+require 'utilities.php';
 // Call the REDCap Connect file in the main "redcap" directory
 require_once findRedcapConnect();
 
@@ -30,7 +17,7 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 //project information
 global $Proj;
 
-require  'messages.php';
+require_once  'messages.php';
 
 
 function PrintTr($title_text,$body_text,$span_label,$a_tag){
@@ -74,8 +61,6 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
 
         if(!empty($array)){
 
-
-           // $a='<a data-toggle="modal" role="button" class="btn" data-load-remote="views/other_or_unknown_view.php " data-target="#ResultsModal">'.lang('VIEW').'</a>';
             $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/other_or_unknown_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
             $span='<span class="label label-danger">'.lang('DANGER').'</span>';
             $_SESSION["OtherOrUnknownErrors"]= $array;
@@ -90,7 +75,6 @@ function PrintBranchingLogicErrors($DataDictionary){
         $array=$res::CheckIfBranchingLogicVariablesExist($DataDictionary);
         if (!empty($array)){
             $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/presence_of_branching_logic_variables_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
-           // $a='<a data-toggle="modal" role="button" class="btn" data-load-remote="views/presence_of_branching_logic_variables_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
             $span='<span class="label label-danger">'.lang('DANGER').'</span>';
             $_SESSION["BranchingLogicErrors"]= $array;
             return PrintTr(lang('BRANCHING_LOGIC_TITLE'),lang('BRANCHING_LOGIC_BODY'),$span,$a);
@@ -101,13 +85,12 @@ function PrintBranchingLogicErrors($DataDictionary){
     }
 
 function PrintDatesConsistentErrors($DataDictionary){
-    include "check_consistency_for_dates.php";
-    $res= new check_consistency_for_dates();
+    include "check_dates_consistency.php";
+    $res= new check__datesConsistency();
     $array=$res::IsDatesConsistent($DataDictionary);
     if (!empty($array)){
         $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_for_dates_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
 
-        //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_for_dates_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["DatesConsistentErrors"]= $array;
         return PrintTr(lang('DATE_CONSISTENT_TITLE'),lang('DATE_CONSISTENT_BODY'),$span,$a);
@@ -123,7 +106,6 @@ function PrintYesNoConsistentErrors($DataDictionary){
     $array=$res::IsYesNoConsistent($DataDictionary);
     if (!empty($array)){
         $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_yes_no_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
-        //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["YesNoConsistentErrors"]= $array;
         return PrintTr(lang('YES_NO_TITLE'),lang('YES_NO_BODY'),$span,$a);
@@ -140,7 +122,6 @@ function PrintPositiveNegativeConsistentErrors($DataDictionary){
     if (!empty($array)){
         $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_positive_negative_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
 
-       // $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["PositiveNegativeConsistentErrors"]= $array;
         return PrintTr(lang('POSITIVE_NEGATIVE_TITLE'),lang('POSITIVE_NEGATIVE_BODY'),$span,$a);
@@ -158,7 +139,6 @@ function PrintIdentifiersErrors($DataDictionary){
     if (!$identifiers_found){
         $a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
-        //$_SESSION["PositiveNegativeConsistentErrors"]= $identifiers_found;
         return PrintTr(lang('IDENTIFIERS_TITLE'),lang('IDENTIFIERS_BODY'),$span,$a);
 
     }else return false;
@@ -172,9 +152,7 @@ function PrintPIErrors($proj){
     $pi_found=$res::PIExist($proj);
     if (!$pi_found){
         $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
         $span='<span class="label label-danger">'.lang('DANGER').'</span>';
-        //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(lang('PI_TITLE'),lang('PI_BODY'),$span,$a);
 
     }else return false;
@@ -188,9 +166,7 @@ function PrintIRBErrors($proj){
     $pi_found=$res::IRBExist($proj);
     if (!$pi_found){
         $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
         $span='<span class="label label-danger">'.lang('DANGER').'</span>';
-        //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(lang('IRB_TITLE'),lang('IRB_BODY'),$span,$a);
 
     }else return false;
@@ -204,14 +180,10 @@ function PrintResearchErrors($proj){
     $research_found=$res::IsAResearchProject($proj);
     if (!$research_found){
         $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
         $span='<span class="label label-info">'.lang('INFO').'</span>';
-        //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(lang('RESEARCH_PROJECT_TITLE'),lang('RESEARCH_PROJECT_BODY'),$span,$a);
 
     }else return false;
-
-
 }
 function PrintJustForFunErrors($proj){
     include_once "check_pi_irb_type.php";
@@ -219,36 +191,26 @@ function PrintJustForFunErrors($proj){
     $jff_found=$res::IsJustForFunProject($proj);
     if ($jff_found){
         $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
-        //$a='<a  target="_blank"  role="button" class="btn" href=" '.APP_PATH_WEBROOT . 'index.php?pid='.$_GET['pid'].'&route=IdentifierCheckController:index" >'.lang('EDIT').'</a>';
         $span='<span class="label label-danger">'.lang('DANGER').'</span>';
-        //$_SESSION["PiErrors"]= $pi_found;
         return PrintTr(lang('JUST_FOR_FUN_PROJECT_TITLE'),lang('JUST_FOR_FUN_PROJECT_BODY'),$span,$a);
 
     }else{
 
         return false;
     }
-
-
 }
 
 function PrintTestRecordsErrors(){
-    include_once "check_test_records.php";
-    $res= new check_test_records();
+    include_once "check_count_test_records_and_exports.php";
+    $res= new check_count_test_recordsAndexports();
     global $Proj;
     $array=$res::CheckTestRecordsAndExports();
     if (!empty($array) and $Proj->project['status']==0){
-       // $a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_positive_negative_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $a= '<u>Exports:</u>'.$array[0].'<br><u> Records: </u>'.$array[1];
-
         $span='<span class="label label-danger">'.lang('DANGER').'</span>';
-        //$_SESSION["PositiveTestRecordsErrors"]= $array;
         return PrintTr(lang('TEST_RECORDS_TITLE'),lang('TEST_RECORDS_BODY'),$span,$a);
 
     }else return false;
-
-
-
 }
 
 function PrintNumberOfFieldsInForms($DataDictionary,$max_recommended){
@@ -257,7 +219,6 @@ function PrintNumberOfFieldsInForms($DataDictionary,$max_recommended){
     $array=$res::getFormsWithToManyFields($DataDictionary,$max_recommended);
     if (!empty($array)){
         $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/number_of_fields_by_form_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
-        //$a='<a data-toggle="modal" role="button" class="btn" href="views/consistency_yes_no_view.php" data-target="#ResultsModal">'.lang('VIEW').'</a>';
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["NumberOfFieldsByForm"]= $array;
         return PrintTr(lang('MAX_NUMBER_OF_RECORDS_TITLE'),lang('MAX_NUMBER_OF_RECORDS_BODY'),$span,$a);
@@ -272,7 +233,6 @@ function PrintValidatedFields($DataDictionary,$min_percentage){
     $array=$res::getMinimumOfValidatedFields($DataDictionary,$min_percentage);
 
     if (!empty($array)){
-        //$a='<a  target="_blank" href="https://medwiki.stanford.edu/display/redcap/Text+Box+Field+Validation" >' .lang('WIKI').$number.'</a>';
         $a= '<u>'.lang('VALIDATED_FIELDS').'</u>'.$array[0].'<br><u>'.lang('TEXT_BOX_FIELDS').'</u>'.$array[1];
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         return PrintTr(lang('NUMBER_VALIDATED_RECORDS_TITLE'),lang('NUMBER_VALIDATED_RECORDS_BODY'),$span,$a);
@@ -283,7 +243,17 @@ function PrintValidatedFields($DataDictionary,$min_percentage){
     }
 
 }
+function  MyFirstInstrumentError(){
+    include_once "check_my_first_instrument_presence.php";
+    $res= new check_my_first_instrument_presence();
+    $my_first_instrument_found=$res::IsMyFirstInstrument();
+    if ($my_first_instrument_found){
+        $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        return PrintTr(lang('MY_FIRST_INSTRUMENT_TITLE'),lang('MY_FIRST_INSTRUMENT_BODY'),$span,$a);
 
+    }else return false;
+}
 
 function PrintSuccess(){
 //TODO: send directly to move to production screen
@@ -324,6 +294,7 @@ if($just_for_fun){
     $res_identifiers= PrintIdentifiersErrors($data_dictionary_array);
     $res_number_of_fields_by_form=PrintNumberOfFieldsInForms($data_dictionary_array,30);
     $res_validated_fields=PrintValidatedFields($data_dictionary_array, 0.05);
+    $res_my_first_instrument_found=MyFirstInstrumentError();
 
 
     if($res_records or
@@ -343,6 +314,7 @@ if($just_for_fun){
         echo $res_positive_negative_consistent;
         echo $res_identifiers;
         echo $res_number_of_fields_by_form;
+        echo $res_my_first_instrument_found;
 
 
     }else{

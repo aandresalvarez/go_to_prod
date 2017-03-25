@@ -10,7 +10,7 @@
 
  */
 include_once 'utilities.php';
-class check_consistency_for_dates
+class check__datesConsistency
 {
 
     /**
@@ -49,7 +49,7 @@ class check_consistency_for_dates
      */
 
     // At this point is just showing  two date fields with differetn data format
-    //TODO: Mayby show all the data fields so maybe easier to update all
+    //TODO: Maybe show all the data fields so maybe easier to update all
     public static function FindDateConsistencyProblems($array){
         global $Proj;
         $FilteredOut= array();
