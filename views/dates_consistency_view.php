@@ -50,7 +50,7 @@ require_once "../../../redcap_connect.php";
             "searching": false,
             data: dataSet,
             columns: [
-                { title: "Form Name" },
+                { title: "Instrument" },
                 { title: "Variable / Field Name" },
                 { title: "Field Label" },
                 { title: "Date Format" },
@@ -75,7 +75,7 @@ require_once "../../../redcap_connect.php";
                 api.column(0, {page:'current'} ).data().each( function ( group, i ) {
                     if ( last !== group ) {
                         $(rows).eq( i ).before(
-                            '<tr class="group"><td colspan="4"><h5><strong>Form: <u>'+group+'</u></strong></h5></td></tr>'
+                            '<tr class="group"><td colspan="4"><h5><strong>Instrument: <u>'+group+'</u></strong></h5></td></tr>'
 
                         );
 

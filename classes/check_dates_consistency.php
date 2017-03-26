@@ -10,7 +10,7 @@
 
  */
 include_once 'utilities.php';
-class check__datesConsistency
+class check_dates_consistency
 {
 
     /**

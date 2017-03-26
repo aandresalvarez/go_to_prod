@@ -32,13 +32,13 @@ function PrintTr($title_text,$body_text,$span_label,$a_tag){
             <td class="gp-info-content">
                 <div class="gp-title-content">
                     <strong>
-                        '.$title_text.' <span class="title-text-plus" style="color: #2E6DA3"><small>(+)</small></span>
+                        '.$title_text. ' <span class="title-text-plus" style="color: #5492a3"><small>(more)</small></span>
                     </strong>
                 </div>
                     
                 <div class="gp-body-content">
                     <p>
-                        '.$body_text.' 
+                        ' .$body_text.' 
                     </p>
                 </div>
             </td>
@@ -86,10 +86,10 @@ function PrintBranchingLogicErrors($DataDictionary){
 
 function PrintDatesConsistentErrors($DataDictionary){
     include "check_dates_consistency.php";
-    $res= new check__datesConsistency();
+    $res= new check_dates_consistency();
     $array=$res::IsDatesConsistent($DataDictionary);
     if (!empty($array)){
-        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/consistency_for_dates_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/dates_consistency_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
 
         $span='<span class="label label-warning">'.lang('WARNING').'</span>';
         $_SESSION["DatesConsistentErrors"]= $array;
@@ -202,7 +202,7 @@ function PrintJustForFunErrors($proj){
 
 function PrintTestRecordsErrors(){
     include_once "check_count_test_records_and_exports.php";
-    $res= new check_count_test_recordsAndexports();
+    $res= new check_count_test_records_and_exports();
     global $Proj;
     $array=$res::CheckTestRecordsAndExports();
     if (!empty($array) and $Proj->project['status']==0){

@@ -39,18 +39,18 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 <link rel="stylesheet" href="styles/go_prod_styles.css">
 
 
-    <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span><?php echo lang('TITLE');?> </div>
+    <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> <?php echo lang('TITLE');?> </div>
     <div id="main-container">
-        <div><p ><?php echo lang('MAIN_TEXT');?></p></div>
+        <div><p><?php echo lang('MAIN_TEXT');?></p></div>
         <button id="go_prod_go_btn" class=" btn btn-lg btn-primary"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <?php echo lang('LOADING');?></button>
         <hr>
         <table  id="go_prod_table" class="table table-striped" >
                 <thead>
                 <tr>
                     <th><strong></strong></th>
-                    <th><h4><?php echo lang('VALIDATION');?> </h4></th>
-                    <th><h4><?php echo lang('RESULT');?></h4></th>
-                    <th><h4><?php echo lang('OPTIONS');?></h4></th>
+                    <th><h4 class="projhdr"><?php echo lang('VALIDATION');?> </h4></th>
+                    <th><h4 class="projhdr"><?php echo lang('RESULT');?></h4></th>
+                    <th><h4 class="projhdr"><?php echo lang('OPTIONS');?></h4></th>
                 </tr>
                 </thead>
                                  <!--INITIAL RESULTS ARE LOADED HERE-->
@@ -121,12 +121,12 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 
                     $('.gp-info-content').on('click', function(e) {
                         e.preventDefault();
-                        var find_plus=$(this).find('.title-text-plus');
+                        var find_more=$(this).find('.title-text-plus');
                          //console.log( find_plus );
-                        if (find_plus.text() == '(+)')
-                            find_plus.text('(-)');
+                        if (find_more.text() == '(more)')
+                            find_more.text('(less)');
                         else
-                            find_plus.text('(+)');
+                            find_more.text('(more)');
                         $(this).children('.gp-body-content').slideToggle();
                     });
 
@@ -159,7 +159,7 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
                 }});
             });
 
-            console.log( "ready!" );
+            console.log( "ready CO!" );
 
         });
 
