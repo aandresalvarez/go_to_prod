@@ -28,7 +28,8 @@ table.go_prod_table {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+    visibility: hidden !important;
 }
 
 
@@ -67,6 +68,11 @@ table.go_prod_table tr {
     height: 100px;
     animation: spin 0.5s linear infinite;
 
+
+}
+.gp-loader {
+
+    padding-bottom: 70px;
 }
 
 @keyframes spin {

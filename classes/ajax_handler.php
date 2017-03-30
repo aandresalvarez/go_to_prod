@@ -70,7 +70,7 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
     }
 
 function PrintBranchingLogicErrors($DataDictionary){
-        include "check_presence_of_branching_logic_variables.php";
+        include_once "check_presence_of_branching_logic_variables.php";
         $res= new check_presence_of_branching_logic_variables();
         $array=$res::CheckIfBranchingLogicVariablesExist($DataDictionary);
         if (!empty($array)){
@@ -83,6 +83,38 @@ function PrintBranchingLogicErrors($DataDictionary){
 
 
     }
+
+function PrintCalculatedFieldsErrors($DataDictionary){
+    include_once "check_presence_of_branching_logic_variables.php";
+    $res= new check_presence_of_branching_logic_variables();
+    $array=$res::CheckIfCalculationVariablesExist($DataDictionary);
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/presence_of_calculated_variables_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
+        $_SESSION["CalculatedFieldsErrors"]= $array;
+        return PrintTr(lang('CALCULATED_FIELDS_TITLE'),lang('CALCULATED_FIELDS_BODY'),$span,$a);
+
+    }else return false;
+
+
+}
+
+function PrintVariableNamesWithTheSameNameAsAnEventNameErrors(){
+    include_once "check_presence_of_branching_logic_variables.php";
+    $res= new check_presence_of_branching_logic_variables();
+    $array=$res::VariableNamesWithTheSameNameAsAnEventName();
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/variables_with_same_name_as_event_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $_SESSION["VariableNamesWithTheSameNameThanAnEventName"]= $array;
+        return PrintTr(lang('VAR_NAMES_EVENT_NAMES_TITLE'),lang('VAR_NAMES_EVENT_NAMES_BODY'),$span,$a);
+
+    }else return false;
+
+
+}
+
+
 
 function PrintDatesConsistentErrors($DataDictionary){
     include "check_dates_consistency.php";
@@ -288,6 +320,8 @@ if($just_for_fun){
     $res_records= PrintTestRecordsErrors();
     $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 100 );
     $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
+    $res_calculated_fields= PrintCalculatedFieldsErrors($data_dictionary_array);
+    $res_var_names_event_names=PrintVariableNamesWithTheSameNameAsAnEventNameErrors();
     $res_dates_consistent= PrintDatesConsistentErrors($data_dictionary_array);
     $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
     $res_positive_negative_consistent= PrintPositiveNegativeConsistentErrors($data_dictionary_array);
@@ -302,12 +336,18 @@ if($just_for_fun){
         $res_branching_logic or
         $res_dates_consistent or
         $res_yes_no_consistent or
-        $res_positive_negative_consistent
-        or $res_identifiers) {
+        $res_positive_negative_consistent or
+        $res_identifiers or
+        $res_number_of_fields_by_form or
+        $res_my_first_instrument_found or
+        $res_calculated_fields or
+        $res_var_names_event_names) {
 
         echo $res_records;
         echo $res_other_or_unknown;
         echo $res_branching_logic;
+        echo $res_calculated_fields;
+       // echo $res_var_names_event_names;
         echo $res_dates_consistent;
         echo $res_yes_no_consistent;
         echo $res_validated_fields;
@@ -315,6 +355,7 @@ if($just_for_fun){
         echo $res_identifiers;
         echo $res_number_of_fields_by_form;
         echo $res_my_first_instrument_found;
+
 
 
     }else{

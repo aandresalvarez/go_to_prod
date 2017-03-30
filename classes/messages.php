@@ -43,7 +43,15 @@ function lang($phrase){
             'DATE_CONSISTENT_BODY' => 'Your project uses different date formats (i.e, mix of mdy and ymd). <strong> You should validate consistently across all dates.</strong> When data is analyzed in statistical software you often only see the unformatted values.  So, it is important to be consistent across your project so the date formats don\'t arbitrarily change from question to question. For example, May 1, 2012 could be formatted as MDY (05-01-2012) or DMY (01-05-2012). Naively, this could be interpreted as both May 1, 2012 AND January 5, 2012 ',
 
             'BRANCHING_LOGIC_TITLE' => 'Branching logic inconsistencies.',
+
             'BRANCHING_LOGIC_BODY' => 'Some fields listed in your branching logic do not exist in this project and thus cannot be used. These fields must be removed from the branching logic before you can continue.',
+
+            'CALCULATED_FIELDS_TITLE' => 'Inconsistencies in calculated fields.',
+            'CALCULATED_FIELDS_BODY' => 'Some fields listed in your calculated fields do not exist in this project and thus cannot be used. These fields must be removed from your calculations before you can continue.',
+
+            'VAR_NAMES_EVENT_NAMES_TITLE' => 'Variable names with the same name as an event name.',
+
+            'VAR_NAMES_EVENT_NAMES_BODY' => 'Some of your field names are the same as an event name, this can create confusion. if this is non intentional please change the name of the variables.',
 
             'TEST_RECORDS_TITLE' => 'This project has not been sufficiently tested.',
             'TEST_RECORDS_BODY' => 'We recommend the creation of at least <strong>three</strong> test records and at least <strong>one</strong> export in development mode. This allows you to preview the type of results expected from your project. It is also highly recommended that you review your project\'s design with a statistician prior to entering production mode to ensure your data capture is configured properly.',
@@ -74,6 +82,7 @@ function lang($phrase){
             'VALIDATION' => 'Issues that you may need to fix',
             'RESULT' => 'Type',
             'OPTIONS' => 'Options',
+            'RUN' => 'Run',
 
 
             'VALIDATED_FIELDS' => 'Validated Fields:',

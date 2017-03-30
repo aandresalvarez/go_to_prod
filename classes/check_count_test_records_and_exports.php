@@ -10,7 +10,7 @@
  //require_once '../../../redcap_connect.php';
 
 //NOTICE: when the project is moved to production made the Survey Responses and created records are deleted
-
+//TODO: if the project is a copy then the log is reset to 0 , find  a different way to count the number of records if the project is a copy.
 class check_count_test_records_and_exports
 {
 

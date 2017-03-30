@@ -7,14 +7,19 @@
  * Time: 11:38 AM
  */
 
-//TODO: is not working for [type_of_cystoscopy_v2] PID 9748
+
 include_once 'utilities.php';
 
 class check_presence_of_branching_logic_variables
 {
 
 
-
+    /**
+     * @param $DataDictionary
+     * @return array
+     *
+     * Extract the Fields with branching logic
+     */
     public static function getBranchingLogicFields($DataDictionary){
         $var= array();
         // Loop through each field and do something with each
@@ -31,7 +36,34 @@ class check_presence_of_branching_logic_variables
     }
 
 
-    public static function ExtractBranchingLogicVariables($array){
+    /**
+     * @param $DataDictionary
+     * @return array
+     *
+     * Extract the Calculated fields
+     */
+    public static function getCalculatedFields($DataDictionary){
+        $var= array();
+        // Loop through each field and do something with each
+        foreach ($DataDictionary as $field_name=>$field_attributes){
+            // Do something with this field if it is a checkbox field
+            if (strlen(trim($field_attributes['select_choices_or_calculations']))>0  and $field_attributes['field_type'] == 'calc' ) {
+                $FormName = $field_attributes['form_name'];
+                $FieldName = $field_attributes['field_name'];
+                $Calculation = $field_attributes['select_choices_or_calculations'];
+                array_push( $var, Array($FormName,$FieldName,$Calculation));
+            }
+        }
+        return $var;
+    }
+
+
+
+
+
+
+
+    public static function ExtractVariables($array){
 
         $branching_logic_array=array();
         $re = '/\[(.*?)\]/';
@@ -45,7 +77,7 @@ class check_presence_of_branching_logic_variables
                 if ($longitudinal){
 
                         //do not remove if the Event name is also used as a Variable name.
-                    if (!in_array($item2,self::VariableNamesWithTheSameNameThanAnEventName())){
+                    if (!in_array($item2,self::VariableNamesWithTheSameNameAsAnEventName())){
                         //if the variable name name is in the list of events then is removed from the list of problems
                         if(!in_array($item2,$events)){
                             array_push( $branching_logic_array, Array($item[0],$item[1],$item2 ));
@@ -67,8 +99,8 @@ class check_presence_of_branching_logic_variables
 
 
 
-//TODO: Create an extra Validation Check Array  with the variable names that also are Event names... and ask if is intentional
-    public static function VariableNamesWithTheSameNameThanAnEventName(){
+
+    public static function VariableNamesWithTheSameNameAsAnEventName(){
         // Check if project is longitudinal
         $var = Array();
         if (REDCap::isLongitudinal()){
@@ -118,12 +150,16 @@ class check_presence_of_branching_logic_variables
     }
 
 
+    /**
+     * @param $DataDictionary
+     * @return array
+     */
     public static function CheckIfBranchingLogicVariablesExist($DataDictionary){
         global $Proj;
 
         $var= array();
         $branching_fields=self::getBranchingLogicFields($DataDictionary);
-        $BranchingLogicArray=self::ExtractBranchingLogicVariables($branching_fields);
+        $BranchingLogicArray=self::ExtractVariables($branching_fields);
         $fields = REDCap::getFieldNames();
 
          $fields= self::AddCheckBoxes($fields);//adding the extra Checkbox variables
@@ -146,6 +182,39 @@ class check_presence_of_branching_logic_variables
         return $var;
      }
 
+
+    /**
+     * @param $DataDictionary
+     * @return array
+     */
+    public static function CheckIfCalculationVariablesExist($DataDictionary){
+        global $Proj;
+
+        $var= array();
+        $calculated_fields=self::getCalculatedFields($DataDictionary);
+        $calculated_fields_array=self::ExtractVariables($calculated_fields);
+        $fields = REDCap::getFieldNames();
+
+        $fields= self::AddCheckBoxes($fields);//adding the extra Checkbox variables
+        foreach ($calculated_fields_array as $variable){
+            if(!in_array($variable[2],$fields)){
+
+
+
+                $label=TextBreak($variable[1]);
+
+
+
+                $link_path=APP_PATH_WEBROOT.'Design/online_designer.php?pid='.$_GET['pid'].'&page='.$variable[0].'&field='.$variable[1];
+                $link_to_edit='<a href='.$link_path.' target="_blank" ><img src='.APP_PATH_IMAGES.'pencil.png></a>';
+
+                array_push( $var, Array(REDCap::getInstrumentNames($variable[0]),$variable[1],$label,'<strong style="color: red">['.$variable[2].']</strong>',$link_to_edit));
+            }
+        }
+
+
+        return $var;
+    }
 
 
 

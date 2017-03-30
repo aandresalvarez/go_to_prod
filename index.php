@@ -5,7 +5,7 @@
  * Date: 3/17/17
  * Time: 12:45 AM
  */
-// large proj for testing 5749
+// large proj for testing 5749 , PID 9748 5292
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../redcap_connect.php";
 
@@ -33,6 +33,9 @@ if ($status == 1)
 
 
 $data_dictionary_array = REDCap::getDataDictionary('array');
+/*echo "<pre>";
+echo print_array($data_dictionary_array);
+echo "</pre>";*/
 
 
 ?>
@@ -57,8 +60,8 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
                 <tbody id="go_prod_tbody">
                 </tbody>
         </table>
-         <div id="gp-loader" ><div  class="loader"></div></div>
-        <div id="gp-loader-extra-time"  ><div class="alert alert-info fade in" role="alert"><?php echo lang('LOADING_EXTRA_TIME');?></div></div>
+         <div id="gp-loader"  ><div  class="loader"></div></div>
+        <div id="gp-loader-extra-time"    ><div class="alert alert-info fade in" role="alert"><?php echo lang('LOADING_EXTRA_TIME');?></div></div>
     </div>
 
 
@@ -83,10 +86,10 @@ $data_dictionary_array = REDCap::getDataDictionary('array');
 
     <script>
 
+        $('#go_prod_table').hide();
+        $('#gp-loader').hide();
+        $('#gp-loader-extra-time').hide();
 
-         $('#go_prod_table').hide();
-         $('#gp-loader').hide();
-         $('#gp-loader-extra-time').hide();
 
         $( document ).ready(function() {
 
