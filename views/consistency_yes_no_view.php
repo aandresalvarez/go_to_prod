@@ -8,7 +8,7 @@
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
-
+require  '../classes/messages.php';
  //echo '<pre>' . print_r($_SESSION["YesNoConsistentErrors"], TRUE) . '</pre>';
 ?>
 
@@ -22,7 +22,7 @@ require_once "../../../redcap_connect.php";
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading"><div class="projhdr"> Yes/ No Consistency</div>
+    <div class="panel-heading"><div class="projhdr">  <?php echo lang('YES_NO_TITLE')?></div>
     </div>
     <div class="panel-body">
     </div>

@@ -56,3 +56,19 @@ function findRedcapConnect()
     }
     return $dir . "/redcap_connect.php";
 }
+
+
+function CleanString($string){
+
+    // first preparing the strings.
+    //for $string1
+    //remove spaces at the end and convert in lowercase
+    $word1=trim(strtolower($string));
+    //remove spaces between words
+    $word1 = str_replace(' ', '_', $word1);
+    //remove tabs
+    $word1 = preg_replace('/\s+/','_',$word1);
+    $word1 = str_replace('__', '_', $word1);
+
+    return $word1;
+}

@@ -59,14 +59,21 @@ function lang($phrase){
             'READY_TO_GO_TITLE' => ' You are all set!. ',
             'READY_TO_GO_BODY' => 'Looks like you are ready to move this project to production mode!.',
 
-            'MY_FIRST_INSTRUMENT_TITLE' => '"My First Instrument" form name found ',
+            'MY_FIRST_INSTRUMENT_TITLE' => '"My First Instrument" form name found. ',
             'MY_FIRST_INSTRUMENT_BODY' => 'You will see one default form already present in your "Online Designer," entitled “My First Instrument.” You may rename this form by clicking the “Rename” button to the right of the form name.',
 
             'NUMBER_VALIDATED_RECORDS_TITLE' => 'Very few validated text fields.',
             'NUMBER_VALIDATED_RECORDS_BODY' => 'Field validation helps to ensure the integrity of your collected data. Every form designer is strongly encouraged to take advantage of this REDCap functionality in order to discover errors during the data entry process and resolve these errors before they are saved to the database. Field validation only applies when the Field Type is a Text Box (Short Text).',
 
-            'MAX_NUMBER_OF_RECORDS_TITLE' => 'Forms with more fields than recommended',
+            'MAX_NUMBER_OF_RECORDS_TITLE' => 'Forms with more fields than recommended.',
             'MAX_NUMBER_OF_RECORDS_BODY' => 'It is recommended that each form has a maximum of<strong> 30 fields</strong> to optimize its performance; however, it is okay to have more fields if necessary.',
+
+            'NOT_DESIGNATED_FORMS_TITLE' => 'Forms not assigned to any event.',
+            'NOT_DESIGNATED_FORMS_BODY' => ' One or more instruments are not assigned to any event. No data will be collected on these instruments if they are not assigned to events in the <strong>Designate Instruments for My Events</strong> page.',
+
+            'CALCULATED_TODAY_TITLE' => 'Calculations using "Today".',
+            'CALCULATED_TODAY_BODY' => 'It is strongly recommended, that you do not use "today" in calc fields. This is because every time you access and save the form, the calculation will run. So if you calculate the age as of today, then a year later you access the form to review or make updates, the elapsed time as of "today" will also be updated (+1 yr). Most users calculate time off of another field (e.g. screening date, enrollment date).',
+
 
             'WARNING' => 'Warning',
             'DANGER' => 'Danger',

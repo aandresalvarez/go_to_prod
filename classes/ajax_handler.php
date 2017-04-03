@@ -19,7 +19,6 @@ global $Proj;
 
 require_once  'messages.php';
 
-
 function PrintTr($title_text,$body_text,$span_label,$a_tag){
 
         return
@@ -51,8 +50,6 @@ function PrintTr($title_text,$body_text,$span_label,$a_tag){
         </tr>';
 
 }
-
-
 function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
         include_once "check_other_or_unknown.php";
 
@@ -68,10 +65,9 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
         }else return false;
 
     }
-
 function PrintBranchingLogicErrors($DataDictionary){
-        include_once "check_presence_of_branching_logic_variables.php";
-        $res= new check_presence_of_branching_logic_variables();
+        include_once "check_presence_of_branching_and_calculated_variables.php";
+        $res= new check_presence_of_branching_and_calculated_variables();
         $array=$res::CheckIfBranchingLogicVariablesExist($DataDictionary);
         if (!empty($array)){
             $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/presence_of_branching_logic_variables_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
@@ -80,13 +76,10 @@ function PrintBranchingLogicErrors($DataDictionary){
             return PrintTr(lang('BRANCHING_LOGIC_TITLE'),lang('BRANCHING_LOGIC_BODY'),$span,$a);
 
         }else return false;
-
-
     }
-
 function PrintCalculatedFieldsErrors($DataDictionary){
-    include_once "check_presence_of_branching_logic_variables.php";
-    $res= new check_presence_of_branching_logic_variables();
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_and_calculated_variables();
     $array=$res::CheckIfCalculationVariablesExist($DataDictionary);
     if (!empty($array)){
         $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/presence_of_calculated_variables_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
@@ -95,13 +88,24 @@ function PrintCalculatedFieldsErrors($DataDictionary){
         return PrintTr(lang('CALCULATED_FIELDS_TITLE'),lang('CALCULATED_FIELDS_BODY'),$span,$a);
 
     }else return false;
+}
+function PrintTodayInCalculationsErrors($DataDictionary){
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_and_calculated_variables();
+    $array=$res::CheckIfTodayExistInCalculations($DataDictionary);
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/today_calculations_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $_SESSION["TodayExistInCalculations"]= $array;
+        return PrintTr(lang('CALCULATED_TODAY_TITLE'),lang('CALCULATED_TODAY_BODY'),$span,$a);
 
-
+    }else return false;
 }
 
+
 function PrintVariableNamesWithTheSameNameAsAnEventNameErrors(){
-    include_once "check_presence_of_branching_logic_variables.php";
-    $res= new check_presence_of_branching_logic_variables();
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_andcalculated_variables();
     $array=$res::VariableNamesWithTheSameNameAsAnEventName();
     if (!empty($array)){
         $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/variables_with_same_name_as_event_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
@@ -113,9 +117,6 @@ function PrintVariableNamesWithTheSameNameAsAnEventNameErrors(){
 
 
 }
-
-
-
 function PrintDatesConsistentErrors($DataDictionary){
     include "check_dates_consistency.php";
     $res= new check_dates_consistency();
@@ -131,7 +132,6 @@ function PrintDatesConsistentErrors($DataDictionary){
 
 
 }
-
 function PrintYesNoConsistentErrors($DataDictionary){
     include_once "check_consistency_for_lists.php";
     $res= new check_consistency_for_lists();
@@ -146,7 +146,6 @@ function PrintYesNoConsistentErrors($DataDictionary){
 
 
 }
-
 function PrintPositiveNegativeConsistentErrors($DataDictionary){
     include_once "check_consistency_for_lists.php";
     $res= new check_consistency_for_lists();
@@ -162,8 +161,6 @@ function PrintPositiveNegativeConsistentErrors($DataDictionary){
 
 
 }
-
-
 function PrintIdentifiersErrors($DataDictionary){
     include_once "check_identifiers.php";
     $res= new check_identifiers();
@@ -177,7 +174,6 @@ function PrintIdentifiersErrors($DataDictionary){
 
 
 }
-
 function PrintPIErrors($proj){
     include_once "check_pi_irb_type.php";
     $res= new check_pi_irb_type();
@@ -191,7 +187,6 @@ function PrintPIErrors($proj){
 
 
 }
-
 function PrintIRBErrors($proj){
     include_once "check_pi_irb_type.php";
     $res= new check_pi_irb_type();
@@ -205,7 +200,6 @@ function PrintIRBErrors($proj){
 
 
 }
-
 function PrintResearchErrors($proj){
     include_once "check_pi_irb_type.php";
     $res= new check_pi_irb_type();
@@ -231,7 +225,6 @@ function PrintJustForFunErrors($proj){
         return false;
     }
 }
-
 function PrintTestRecordsErrors(){
     include_once "check_count_test_records_and_exports.php";
     $res= new check_count_test_records_and_exports();
@@ -244,7 +237,6 @@ function PrintTestRecordsErrors(){
 
     }else return false;
 }
-
 function PrintNumberOfFieldsInForms($DataDictionary,$max_recommended){
     include_once 'check_number_of_fields_by_form.php';
     $res= new check_number_of_fields_by_form();
@@ -258,7 +250,6 @@ function PrintNumberOfFieldsInForms($DataDictionary,$max_recommended){
     }else return false;
 
 }
-
 function PrintValidatedFields($DataDictionary,$min_percentage){
     include_once 'check_field_validation.php';
     $res= new check_field_validation();
@@ -287,6 +278,23 @@ function  MyFirstInstrumentError(){
     }else return false;
 }
 
+
+
+function  NotDesignatedFormsErrors(){
+    include_once "check_un_designated_longitudinal_forms.php";
+    $res= new check_un_designated_longitudinal_forms();
+    $not_designated_forms=$res::NotDesignatedForms();
+    if (!empty($not_designated_forms)){
+
+        //$a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'Design/designate_forms.php?pid='.$_GET['pid'].'"  >'.lang('VIEW').'</a>';
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/undesignated_forms_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $_SESSION["NotDesignatedFormsErrors"]= $not_designated_forms;
+
+        return PrintTr(lang('NOT_DESIGNATED_FORMS_TITLE'),lang('NOT_DESIGNATED_FORMS_BODY'),$span,$a);
+
+    }else return false;
+}
 function PrintSuccess(){
 //TODO: send directly to move to production screen
     $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
@@ -301,27 +309,22 @@ $just_for_fun=PrintJustForFunErrors($Proj);
 if($just_for_fun){
     echo $just_for_fun;
 }else{
-
     //if is a research project ask for PI and IRB
     $research=PrintResearchErrors($Proj);
     if(!$research){
         echo PrintPIErrors($Proj);
         echo PrintIRBErrors($Proj);
-
-
-
     }else{
         //if is not a research project but you want to go to production anyways
         echo $research;
-
-
     }
 
     $res_records= PrintTestRecordsErrors();
     $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 100 );
     $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
     $res_calculated_fields= PrintCalculatedFieldsErrors($data_dictionary_array);
-    $res_var_names_event_names=PrintVariableNamesWithTheSameNameAsAnEventNameErrors();
+    $res_today_in_calculations= PrintTodayInCalculationsErrors($data_dictionary_array);
+    //$res_var_names_event_names=PrintVariableNamesWithTheSameNameAsAnEventNameErrors();//todo: fix this list
     $res_dates_consistent= PrintDatesConsistentErrors($data_dictionary_array);
     $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
     $res_positive_negative_consistent= PrintPositiveNegativeConsistentErrors($data_dictionary_array);
@@ -329,6 +332,7 @@ if($just_for_fun){
     $res_number_of_fields_by_form=PrintNumberOfFieldsInForms($data_dictionary_array,30);
     $res_validated_fields=PrintValidatedFields($data_dictionary_array, 0.05);
     $res_my_first_instrument_found=MyFirstInstrumentError();
+    $res_not_designated_forms=NotDesignatedFormsErrors();
 
 
     if($res_records or
@@ -341,12 +345,14 @@ if($just_for_fun){
         $res_number_of_fields_by_form or
         $res_my_first_instrument_found or
         $res_calculated_fields or
-        $res_var_names_event_names) {
+        $res_not_designated_forms or
+        $res_today_in_calculations) {
 
         echo $res_records;
         echo $res_other_or_unknown;
         echo $res_branching_logic;
         echo $res_calculated_fields;
+         echo $res_today_in_calculations;
        // echo $res_var_names_event_names;
         echo $res_dates_consistent;
         echo $res_yes_no_consistent;
@@ -355,8 +361,7 @@ if($just_for_fun){
         echo $res_identifiers;
         echo $res_number_of_fields_by_form;
         echo $res_my_first_instrument_found;
-
-
+        echo $res_not_designated_forms;
 
     }else{
         //if all is ok you can go to production!!

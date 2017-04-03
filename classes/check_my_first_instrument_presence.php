@@ -8,7 +8,7 @@
  */
 class check_my_first_instrument_presence
 {
-//todo: check if still exist a form named :: My First Instrument
+//check if still exist a form named :: My First Instrument
 
 
 public static function IsMyFirstInstrument ( ){

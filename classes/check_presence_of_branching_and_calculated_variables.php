@@ -10,7 +10,7 @@
 
 include_once 'utilities.php';
 
-class check_presence_of_branching_logic_variables
+class check_presence_of_branching_and_calculated_variables
 {
 
 
@@ -57,9 +57,21 @@ class check_presence_of_branching_logic_variables
         return $var;
     }
 
+    public static function getTodayCalculations($CalcFieldsArray){
 
+        //$haystack = "foo bar baz";
 
+        $today_var   = strtolower("\"today\"");
+        $today_var2   = strtolower('\'today\'');
+        $var=Array();
+        foreach ($CalcFieldsArray as $item){
 
+            if(( strpos( strtolower($item[2]), $today_var ) !== false )  or (strpos( strtolower($item[2]), $today_var2 ) !== false )){
+                array_push( $var, $item);
+            }
+        }
+        return $var;
+    }
 
 
 
@@ -114,11 +126,21 @@ class check_presence_of_branching_logic_variables
     //transform a checkbox option from triple underscore  ___ to parenthesis () presentation
     public static function TransformCheckBoxField($field___format){
 
-        //$number = substr(trim($field___format), -1);
-        $number = substr(trim($field___format), strpos($field___format, "___") + 3);
-        //echo $number;
-        $underscore="___".$number;
-        $parenthesis="(".$number.")";
+         // check if is a negative code for example var(-2)
+        if(strpos( trim($field___format),  "____" ) !== false){
+            $number = substr(trim($field___format), strpos($field___format, "____") + 4);
+            //echo $number;
+            $underscore="____".$number;
+            $parenthesis="(-".$number.")";
+
+        }else {
+            $number = substr(trim($field___format), strpos($field___format, "___") + 3);
+            //echo $number;
+            $underscore = "___" . $number;
+            $parenthesis = "(" . $number . ")";
+        }
+
+
         $parenthesis_format = str_replace($underscore,$parenthesis, $field___format);
 
 
@@ -217,6 +239,25 @@ class check_presence_of_branching_logic_variables
     }
 
 
+
+    public static function CheckIfTodayExistInCalculations($DataDictionary){
+
+        $var=array();
+        $today_fields=self::getCalculatedFields($DataDictionary);
+        $today_list=self::getTodayCalculations($today_fields);
+        foreach ($today_list as $today){
+
+            $label=TextBreak($today[1]);
+
+            $link_path=APP_PATH_WEBROOT.'Design/online_designer.php?pid='.$_GET['pid'].'&page='.$today[0].'&field='.$today[1];
+            $link_to_edit='<a href='.$link_path.' target="_blank" ><img src='.APP_PATH_IMAGES.'pencil.png></a>';
+
+            array_push($var,Array(REDCap::getInstrumentNames($today[0]),$today[1],$label,$today[2],$link_to_edit ));
+        }
+
+        return $var;
+
+    }
 
 
 

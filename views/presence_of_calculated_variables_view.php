@@ -7,7 +7,7 @@
  */
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
-
+require  '../classes/messages.php';
 
  //echo '<pre>' . print_r($_SESSION["CalculatedFieldsErrors"], TRUE) . '</pre>';
 ?>
@@ -17,7 +17,7 @@ require_once "../../../redcap_connect.php";
 
 <div class="panel panel-default" width="50%">
     <!-- Default panel contents -->
-    <div class="panel-heading"><div class="projhdr"> Variable Names With The Same Name Than An Event Name </div>
+    <div class="panel-heading"><div class="projhdr"> <?php echo lang('CALCULATED_FIELDS_TITLE')?> </div>
     </div>
     <div class="panel-body">
     </div>

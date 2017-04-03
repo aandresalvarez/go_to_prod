@@ -2,33 +2,27 @@
 /**
  * Created by PhpStorm.
  * User: alvaro1
- * Date: 3/14/17
+ * Date: 3/27/17
  * Time: 12:23 PM
  */
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
-//echo '<pre>' . print_r($_SESSION["DatesConsistentErrors"], TRUE) . '</pre>';
 require  '../classes/messages.php';
-
+ //echo '<pre>' . print_r($_SESSION["TodayExistInCalculations"], TRUE) . '</pre>';
 ?>
-<!--
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>-->
 
 
 
 
-<div class="panel panel-default">
+<div class="panel panel-default" width="50%">
     <!-- Default panel contents -->
-    <div class="panel-heading"><div class="projhdr">  <?php echo lang('DATE_CONSISTENT_TITLE')?> </div>
+    <div class="panel-heading"><div class="projhdr">  <?php echo lang('CALCULATED_TODAY_TITLE')?> </div>
     </div>
     <div class="panel-body">
     </div>
-    <div style="padding: 1px">
-        <table id="is_date_consistent_data_table" class=" display " width="100%" cellspacing="0"></table>
+    <div >
+        <table id="today_exist_in_calculations_data_table" class=" display " width="100%" cellspacing="0"></table>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -37,32 +31,31 @@ require  '../classes/messages.php';
 
 <script>
 
+    dataSet = <?php echo json_encode($_SESSION["TodayExistInCalculations"])?>;
 
-
-    dataSet = <?php echo json_encode($_SESSION["DatesConsistentErrors"])?>;
-
+    console.log(dataSet);
     $(document).ready(function() {
 
-        var table =  $('#is_date_consistent_data_table').DataTable({
+        var table =  $('#today_exist_in_calculations_data_table').DataTable({
 
             "paging":         false,
-
             "searching": false,
+
             data: dataSet,
             columns: [
                 { title: "Instrument" },
                 { title: "Variable / Field Name" },
                 { title: "Field Label" },
-                { title: "Date Format" },
+                { title: "Missing Variable" },
                 { title: "Edit" }
             ],
 
             "columnDefs": [
                 { "visible": false, "targets": 0 },
 
+                {"className": "dt-center", "targets": 2},
                 {"className": "dt-center", "targets": 3},
-                {"className": "dt-center", "targets": 4},
-                { "width": "25px", "targets": 4}
+                { "width": "25px", "targets": 3}
 
             ],
             "order": [[ 0, 'asc' ]],
@@ -87,7 +80,7 @@ require  '../classes/messages.php';
 
 
         // Order by the grouping
-        $('#is_date_consistent_data_table tbody').on( 'click', 'tr.group', function () {
+        $('#today_exist_in_calculations_data_table tbody').on( 'click', 'tr.group', function () {
                 var currentOrder = table.order()[0];
                 if ( currentOrder[0] === 0 && currentOrder[1] === 'asc' ) {
                     table.order( [ 0, 'desc' ] ).draw();

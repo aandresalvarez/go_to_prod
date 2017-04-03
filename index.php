@@ -16,7 +16,7 @@ require_once 'classes/messages.php';
 require_once 'classes/utilities.php';
 
 // Check if user can create new records, if not Exit.
-//IsProjectAdmin();
+ //IsProjectAdmin();
 
 //project information
 global $Proj;
@@ -45,9 +45,9 @@ echo "</pre>";*/
     <div class="projhdr"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> <?php echo lang('TITLE');?> </div>
     <div id="main-container">
         <div><p><?php echo lang('MAIN_TEXT');?></p></div>
-        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <?php echo lang('LOADING');?></button>
+        <button id="go_prod_go_btn" class=" btn btn-lg btn-primary"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span><?php echo lang('RUN');?> </button>
         <hr>
-        <table  id="go_prod_table" class="table table-striped" >
+        <table  id="go_prod_table" style="display: none"  class="table table-striped" >
                 <thead>
                 <tr>
                     <th><strong></strong></th>
@@ -60,8 +60,8 @@ echo "</pre>";*/
                 <tbody id="go_prod_tbody">
                 </tbody>
         </table>
-         <div id="gp-loader"  ><div  class="loader"></div></div>
-        <div id="gp-loader-extra-time"    ><div class="alert alert-info fade in" role="alert"><?php echo lang('LOADING_EXTRA_TIME');?></div></div>
+         <div id="gp-loader"  style="display: none"  ><div  class="loader"></div></div>
+        <div id="gp-loader-extra-time"  style="display: none"   ><div class="alert alert-info fade in" role="alert"><?php echo lang('LOADING_EXTRA_TIME');?></div></div>
     </div>
 
 
@@ -86,9 +86,9 @@ echo "</pre>";*/
 
     <script>
 
-        $('#go_prod_table').hide();
+       /* $('#go_prod_table').hide();
         $('#gp-loader').hide();
-        $('#gp-loader-extra-time').hide();
+        $('#gp-loader-extra-time').hide();*/
 
 
         $( document ).ready(function() {

@@ -8,7 +8,7 @@
 // Call the REDCap Connect file in the main "redcap" directory
 require_once "../../../redcap_connect.php";
 
-
+require  '../classes/messages.php';
   //echo '<pre>' . print_r($_SESSION["BranchingLogicErrors"], TRUE) . '</pre>';
 ?>
 
@@ -22,7 +22,7 @@ require_once "../../../redcap_connect.php";
 
 <div class="panel panel-default" width="50%">
     <!-- Default panel contents -->
-    <div class="panel-heading"><div class="projhdr"> Branching Logic Not Valid Variables </div>
+    <div class="panel-heading"><div class="projhdr"> <?php echo lang('BRANCHING_LOGIC_TITLE')?> </div>
     </div>
     <div class="panel-body">
     </div>
