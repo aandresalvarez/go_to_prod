@@ -15,7 +15,20 @@ plug-in for REDCap Version > 7.3.0
   <li>3.Inconsistencies in coding for positive/negative questions. </li>
     <li>4. No fields tagged as identifiers.</li>
     <li>5. Missing PI name and last name.  </li>  
-  
+   <li>5. Missing PI name and last name.  </li> 
+    
+     <li>6. IRB Information.  </li> 
+      <li>7. Purpose of the project. </li> 
+       <li>8. Date format inconsistencies. </li> 
+        <li>9. Branching logic inconsistencies.  </li> 
+         <li>10. Inconsistencies in calculated fields.  </li> 
+          <li>11. Variable names with the same name as an event name.  </li> 
+           <li>12. "My First Instrument" form name precence.  </li> 
+            <li>13. % of validated fields.  </li> 
+             <li>14. Forms with more fiedls than recommended.  </li> 
+              <li>15. Forms not assigned to any event.  </li> 
+               <li>16. Calculations using "Today".  </li> 
+                <li>17. The project is sufficiently tested (at least three test records and 1 data export)  </li> 
   
   
 </ul>
