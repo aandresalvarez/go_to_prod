@@ -14,9 +14,8 @@ plug-in for REDCap Version > 7.3.0
     <li>4. No fields tagged as identifiers.</li>
     <li>5. Missing PI name and last name.  </li>  
    <li>5. Missing PI name and last name.  </li> 
-    
-     <li>6. IRB Information.  </li> 
-      <li>7. Purpose of the project. </li> 
+  <li>6. IRB Information.  </li> 
+<li>7. Purpose of the project. </li> 
        <li>8. Date format inconsistencies. </li> 
         <li>9. Branching logic inconsistencies.  </li> 
          <li>10. Inconsistencies in calculated fields.  </li> 
