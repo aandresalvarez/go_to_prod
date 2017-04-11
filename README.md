@@ -6,7 +6,8 @@ Move to Production Check List
 plug-in for REDCap Version > 7.3.0
 
 
-<strong><u>Checklist:<u/></strong>
+
+<strong><u>With this plugin, you can run the following checklist in the data dictionary of a REDCap database.<u/></strong>
 <ul>
   <li>1.Incorrect coding of "other" and/or "unknown" values in drop-down lists, radio-buttons or check-boxes.</li>
   <li>2.Inconsistencies in coding for yes/no questions.</li>
