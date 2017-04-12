@@ -320,7 +320,7 @@ if($just_for_fun){
     }
 
     $res_records= PrintTestRecordsErrors();
-    $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 100 );
+    $res_other_or_unknown= PrintOtherOrUnknownErrors($data_dictionary_array, 95 );
     $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
     $res_calculated_fields= PrintCalculatedFieldsErrors($data_dictionary_array);
     $res_today_in_calculations= PrintTodayInCalculationsErrors($data_dictionary_array);

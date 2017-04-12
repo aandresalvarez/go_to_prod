@@ -7,7 +7,7 @@
 //Validation Labels
 
 
-    //TODO: Improve the styles  creating a css file.
+
 /**
  * @param $phrase
  * @return mixed
