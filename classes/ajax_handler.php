@@ -89,6 +89,64 @@ function PrintCalculatedFieldsErrors($DataDictionary){
 
     }else return false;
 }
+
+function PrintASILogicErrors(){
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_and_calculated_variables();
+    $array=$res::CheckIfASILogicVariablesExist();
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/asi_logic_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
+        $_SESSION["ASILogicErrors"]= $array;
+        return PrintTr(lang('ASI_LOGIC_TITLE'),lang('ASI_LOGIC_BODY'),$span,$a);
+
+    }else return false;
+
+}
+
+function PrintQueueLogicErrors(){
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_and_calculated_variables();
+    $array=$res::CheckIfQueueLogicVariablesExist();
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/queue_logic_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-danger">'.lang('DANGER').'</span>';
+        $_SESSION["QueueLogicErrors"]= $array;
+        return PrintTr(lang('QUEUE_LOGIC_TITLE'),lang('QUEUE_LOGIC_BODY'),$span,$a);
+
+    }else return false;
+
+}
+function PrintDataQualityLogicErrors(){
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_and_calculated_variables();
+    $array=$res::CheckIfDataQualityLogicVariablesExist();
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/data_quality_logic_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $_SESSION["DataQualityLogicErrors"]= $array;
+        return PrintTr(lang('DATA_QUALITY_LOGIC_TITLE'),lang('DATA_QUALITY_LOGIC_BODY'),$span,$a);
+
+    }else return false;
+
+}
+function PrintReportsLogicErrors(){
+    include_once "check_presence_of_branching_and_calculated_variables.php";
+    $res= new check_presence_of_branching_and_calculated_variables();
+    $array=$res::CheckIfReportsLogicVariablesExist();
+    if (!empty($array)){
+        $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/reports_logic_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').' </a>';
+        $span='<span class="label label-warning">'.lang('WARNING').'</span>';
+        $_SESSION["ReportsLogicErrors"]= $array;
+        return PrintTr(lang('REPORTS_LOGIC_TITLE'),lang('REPORTS_LOGIC_BODY'),$span,$a);
+
+    }else return false;
+
+}
+
+
+
+
 function PrintTodayInCalculationsErrors($DataDictionary){
     include_once "check_presence_of_branching_and_calculated_variables.php";
     $res= new check_presence_of_branching_and_calculated_variables();
@@ -324,6 +382,10 @@ if($just_for_fun){
     $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
     $res_calculated_fields= PrintCalculatedFieldsErrors($data_dictionary_array);
     $res_today_in_calculations= PrintTodayInCalculationsErrors($data_dictionary_array);
+     $res_asi_logic=PrintASILogicErrors();
+     $res_queue_logic=PrintQueueLogicErrors();
+     $res_data_quality_logic=PrintDataQualityLogicErrors();
+     $res_reports_logic=PrintReportsLogicErrors();
     //$res_var_names_event_names=PrintVariableNamesWithTheSameNameAsAnEventNameErrors();//todo: fix this list
     $res_dates_consistent= PrintDatesConsistentErrors($data_dictionary_array);
     $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
@@ -346,14 +408,22 @@ if($just_for_fun){
         $res_my_first_instrument_found or
         $res_calculated_fields or
         $res_not_designated_forms or
-        $res_today_in_calculations) {
+        $res_today_in_calculations or
+        $res_asi_logic or
+        $res_queue_logic or
+        $res_data_quality_logic or
+        $res_reports_logic) {
 
         echo $res_records;
         echo $res_other_or_unknown;
         echo $res_branching_logic;
         echo $res_calculated_fields;
-         echo $res_today_in_calculations;
-       // echo $res_var_names_event_names;
+        echo $res_today_in_calculations;
+        echo $res_asi_logic;
+        echo $res_queue_logic;
+        echo $res_data_quality_logic;
+        echo $res_reports_logic;
+        // echo $res_var_names_event_names;
         echo $res_dates_consistent;
         echo $res_yes_no_consistent;
         echo $res_validated_fields;

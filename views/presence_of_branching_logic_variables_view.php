@@ -30,7 +30,7 @@ require  '../classes/messages.php';
         <table id="presence_of_branching_logic_data_table" class=" display " width="100%" cellspacing="0"></table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('CLOSE')?></button>
     </div>
 </div>
 

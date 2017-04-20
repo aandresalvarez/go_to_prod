@@ -12,6 +12,8 @@
  * @param $phrase
  * @return mixed
  */
+
+//TODO: the names of the columns in the view files and the close button are hared coded.. create lang variables them.
 function lang($phrase){
         static $lang = array(
             'OTHER_OR_UNKNOWN_TITLE' => 'Incorrect coding of "other" and/or "unknown" values in drop-down lists, radio-buttons or check-boxes.',
@@ -47,7 +49,7 @@ function lang($phrase){
             'BRANCHING_LOGIC_BODY' => 'Some fields listed in your branching logic do not exist in this project and thus cannot be used. These fields must be removed from the branching logic before you can continue.',
 
             'CALCULATED_FIELDS_TITLE' => 'Inconsistencies in calculated fields.',
-            'CALCULATED_FIELDS_BODY' => 'Some fields listed in your calculated fields do not exist in this project and thus cannot be used. These fields must be removed from your calculations before you can continue.',
+            'CALCULATED_FIELDS_BODY' => 'Some <strong>fields names or event names</strong> listed in your calculated fields do not exist in this project and thus cannot be used. These fields must be removed from your calculations before you can continue.',
 
             'VAR_NAMES_EVENT_NAMES_TITLE' => 'Variable names with the same name as an event name.',
 
@@ -74,12 +76,23 @@ function lang($phrase){
             'CALCULATED_TODAY_TITLE' => 'Calculations using "Today".',
             'CALCULATED_TODAY_BODY' => 'It is strongly recommended, that you do not use "today" in calc fields. This is because every time you access and save the form, the calculation will run. So if you calculate the age as of today, then a year later you access the form to review or make updates, the elapsed time as of "today" will also be updated (+1 yr). Most users calculate time off of another field (e.g. screening date, enrollment date).',
 
+            'ASI_LOGIC_TITLE' => 'Problems found in ASI logic.',
+            'ASI_LOGIC_BODY' => 'Some fields listed in your Automated Surveys Invitation (ASI) logic do not exist in this project and thus cannot be used.',
+            'QUEUE_LOGIC_TITLE' => 'Problems found in the Survey Queue logic.',
+            'QUEUE_LOGIC_BODY' => 'Some fields listed in your Survey Queue logic do not exist in this project and thus cannot be used.',
+
+            'DATA_QUALITY_LOGIC_TITLE' => 'Problems found in the Data Quality Module logic.',
+            'DATA_QUALITY_LOGIC_BODY' => 'Some fields listed in your Data Quality Module logic do not exist in this project and thus cannot be used.',
+
+            'REPORTS_LOGIC_TITLE' => 'Problems found in some of your Reports Advanced Filter Logic.',
+            'REPORTS_LOGIC_BODY' => 'Some fields listed in your Reports Advanced Filter Logic do not exist in this project and thus cannot be used.',
+
 
             'WARNING' => 'Warning',
             'DANGER' => 'Danger',
             'INFO' => 'Info',
             'SUCCESS' => 'Success',
-            'VIEW' => 'Details',
+            'VIEW' => 'View',
             'EDIT' => 'Edit',
             'PROJECT_SETUP' => 'Project Setup',
             'PROJECT_GO_PROD' => 'Project Setup',
@@ -90,6 +103,9 @@ function lang($phrase){
             'RESULT' => 'Type',
             'OPTIONS' => 'Options',
             'RUN' => 'Run',
+            'YES' => 'Yes',
+            'NO' => 'No',
+            'CLOSE' => 'Close',
 
 
             'VALIDATED_FIELDS' => 'Validated Fields:',
