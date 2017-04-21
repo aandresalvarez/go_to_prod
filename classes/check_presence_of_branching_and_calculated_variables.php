@@ -80,7 +80,7 @@ class check_presence_of_branching_and_calculated_variables
         $sql = "SELECT 
 	              SRV.form_name as form, RSS.event_id as event_id,  RSS.condition_logic as logic 
                 FROM 
-	              redcap.redcap_surveys as SRV, redcap.redcap_surveys_scheduler as RSS 
+	              redcap_surveys as SRV, redcap_surveys_scheduler as RSS 
                 WHERE
 	               RSS.condition_logic IS NOT NULL and SRV.survey_id=RSS.survey_id and SRV.project_id=".$_GET['pid'];
         $result = db_query( $sql );
@@ -97,7 +97,7 @@ class check_presence_of_branching_and_calculated_variables
         $sql = "SELECT 
 	              SRV.form_name as form,  RSQ.event_id as event_id, RSQ.condition_logic as logic 
                 FROM 
-	              redcap.redcap_surveys as SRV, redcap.redcap_surveys_queue as RSQ 
+	              redcap_surveys as SRV, redcap_surveys_queue as RSQ 
                 WHERE
 	               RSQ.condition_logic IS NOT NULL and SRV.survey_id=RSQ.survey_id and SRV.project_id=".$_GET['pid'];
         $result = db_query( $sql );
@@ -111,7 +111,7 @@ class check_presence_of_branching_and_calculated_variables
     public static function ExtractDataQualityLogic(){
 
         $var=Array();
-        $sql = "SELECT  rule_name as name, real_time_execute as rtime, rule_logic as logic FROM redcap.redcap_data_quality_rules where rule_logic IS NOT NULL project_id=".$_GET['pid'];
+        $sql = "SELECT  rule_name as name, real_time_execute as rtime, rule_logic as logic FROM redcap_data_quality_rules as DQR where DQR.rule_logic IS NOT NULL and DQR.project_id=".$_GET['pid'];
         $result = db_query( $sql );
         while ( $query_res = db_fetch_assoc( $result ) )
         {
@@ -126,7 +126,7 @@ class check_presence_of_branching_and_calculated_variables
     public static function ExtractReportsLogic(){
 
         $var=Array();
-        $sql = "SELECT  title as title, report_id as reportid, advanced_logic as logic  FROM redcap.redcap_reports where advanced_logic IS NOT NULL and project_id=".$_GET['pid'];
+        $sql = "SELECT  title as title, report_id as reportid, advanced_logic as logic  FROM redcap_reports where advanced_logic IS NOT NULL and project_id=".$_GET['pid'];
         $result = db_query( $sql );
         while ( $query_res = db_fetch_assoc( $result ) )
         {
