@@ -14,7 +14,7 @@ If the thought of loosing the data you have entered into your REDCap project sou
   <li>3.Inconsistencies in coding for positive/negative questions. </li>
     <li>4. No fields tagged as identifiers.</li>
     <li>5. Missing PI name and last name.  </li>  
-   <li>5. Missing PI name and last name.  </li> 
+  
   <li>6. IRB Information.  </li> 
 <li>7. Purpose of the project. </li> 
        <li>8. Date format inconsistencies. </li> 
