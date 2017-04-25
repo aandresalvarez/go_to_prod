@@ -5,7 +5,7 @@ Move to Production Check List
 
 plug-in for REDCap Version > 7.3.0
 
-If the thought of loosing the data you have entered into your REDCap project sounds painful, you should be in production mode. Production mode helps protect your data from accidental mistakes. This plugin will allow you to verify if your project is ready to move to production mode or if you first need to fix something.
+If the thought of losing the data you have entered into your REDCap project sounds painful, you should be in production mode. Production mode helps protect your data from accidental mistakes. This plugin will allow you to verify if your project is ready to move to production mode or if you first need to fix something.
 
 <strong><u>With this plugin, you can run the following checklist in the data dictionary of a REDCap database.<u/></strong>
 <ul>
