@@ -31,3 +31,6 @@ If the thought of losing the data you have entered into your REDCap project soun
                  <li>19. <strong>New</strong> - Inconsistencies in Data Quality Module Logic  </li> 
                 <li>20. <strong>New</strong> - Inconsistencies in Advanced Reports Logic  </li> 
 </ul>
+
+### See it in action
+![Example](/gotoprod.gif?raw=true "Check list Example")
