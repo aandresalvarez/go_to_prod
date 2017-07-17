@@ -21,9 +21,9 @@ If the thought of losing the data you have entered into your REDCap project soun
         <li>9. Branching logic inconsistencies.  </li> 
          <li>10. Inconsistencies in calculated fields.  </li> 
           <li>11. Variable names with the same name as an event name.  </li> 
-           <li>12. "My First Instrument" form name precence.  </li> 
+           <li>12. "My First Instrument" form name presence.  </li> 
             <li>13. % of validated fields.  </li> 
-             <li>14. Forms with more fiedls than recommended.  </li> 
+             <li>14. Forms with more fields than recommended.  </li> 
               <li>15. Forms not assigned to any event.  </li> 
                <li>16. Calculations using "Today".  </li> 
                 <li>17. The project is sufficiently tested (at least three test records and 1 data export)  </li> 
