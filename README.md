@@ -32,5 +32,5 @@ If the thought of losing the data you have entered into your REDCap project soun
                 <li>20. <strong>New</strong> - Inconsistencies in Advanced Reports Logic  </li> 
 </ul>
 
-### See it in action
+### See in action
 ![Example](/gotoprod.gif?raw=true "Check list Example")
