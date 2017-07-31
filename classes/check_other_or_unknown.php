@@ -20,7 +20,8 @@ require_once 'utilities.php';
 //public $Ids= "97,98,99,999,9999,888,8888,-1,777,7777";
 
 //TODO: move the keywords to the language file
-
+//
+//review NOTE: FROM USER::::Thank you for running the check. I do have one issue with your "Danger" warning on the demographics codes. I do not agree with using 99 - Other. 'Other' is a specific value collected that leads to further specific text and subtype analysis. Recommended codes for missing or unknown values would be 98='not available' or 99='unknown'.
 //TODO: check mix of numbers and strings  in codes  For example: 1,cat|2, dog| 3, mouse| NA, different animal
     /**
      * @return string

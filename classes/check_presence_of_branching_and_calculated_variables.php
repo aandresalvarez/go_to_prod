@@ -82,7 +82,7 @@ class check_presence_of_branching_and_calculated_variables
                 FROM 
 	              redcap_surveys as SRV, redcap_surveys_scheduler as RSS 
                 WHERE
-	               RSS.condition_logic IS NOT NULL and SRV.survey_id=RSS.survey_id and SRV.project_id=".$_GET['pid'];
+	               RSS.condition_logic IS NOT NULL and RSS.active=1 and SRV.survey_id=RSS.survey_id and SRV.project_id=".$_GET['pid'];
         $result = db_query( $sql );
         while ( $query_res = db_fetch_assoc( $result ) )
         {
@@ -91,7 +91,7 @@ class check_presence_of_branching_and_calculated_variables
         return $var;
     }
 
-    public static function ExtractQueueLogic(){ //TODO: for some reason in some projects the query returns an extra logic variable that does not exist and is created by REDCap.. not sure how to skip that.
+    public static function ExtractQueueLogic(){ //TODO: for some reason in some projects the query returns an extra logic variable that does not exist and is created by REDCap.. (partiali fixed).
 
         $var=Array();
         $sql = "SELECT 
@@ -99,7 +99,7 @@ class check_presence_of_branching_and_calculated_variables
                 FROM 
 	              redcap_surveys as SRV, redcap_surveys_queue as RSQ 
                 WHERE
-	               RSQ.condition_logic IS NOT NULL and SRV.survey_id=RSQ.survey_id and SRV.project_id=".$_GET['pid'];
+	               RSQ.condition_logic IS NOT NULL and RSQ.active=1 and SRV.survey_id=RSQ.survey_id and SRV.project_id=".$_GET['pid'];
         $result = db_query( $sql );
         while ( $query_res = db_fetch_assoc( $result ) )
         {

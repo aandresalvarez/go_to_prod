@@ -59,7 +59,7 @@ function PrintOtherOrUnknownErrors($DataDictionary, $similarity){
         if(!empty($array)){
 
             $a='<a href="#ResultsModal" role="button" class="btn" data-toggle="modal" data-load-remote="views/other_or_unknown_view.php" data-isloaded="false" data-remote-target="#ResultsModal">'.lang('VIEW').'</a>';
-            $span='<span class="label label-danger">'.lang('DANGER').'</span>';
+            $span='<span class="label label-warning">'.lang('WARNING').'</span>';
             $_SESSION["OtherOrUnknownErrors"]= $array;
            return PrintTr(lang('OTHER_OR_UNKNOWN_TITLE'),lang('OTHER_OR_UNKNOWN_BODY'),$span,$a);
         }else return false;
@@ -274,6 +274,7 @@ function PrintJustForFunErrors($proj){
     $res= new check_pi_irb_type();
     $jff_found=$res::IsJustForFunProject($proj);
     if ($jff_found){
+        $_SESSION["IsJustForFun"]= $jff_found;
         $a='<a  target="_blank" href=" '.APP_PATH_WEBROOT.'ProjectSetup/index.php?pid='.$_GET['pid'].'"  >'.lang('PROJECT_SETUP').'</a>';
         $span='<span class="label label-danger">'.lang('DANGER').'</span>';
         return PrintTr(lang('JUST_FOR_FUN_PROJECT_TITLE'),lang('JUST_FOR_FUN_PROJECT_BODY'),$span,$a);
@@ -368,13 +369,16 @@ if($just_for_fun){
     echo $just_for_fun;
 }else{
     //if is a research project ask for PI and IRB
-    $research=PrintResearchErrors($Proj);
-    if(!$research){
-        echo PrintPIErrors($Proj);
-        echo PrintIRBErrors($Proj);
-    }else{
+    $no_research=PrintResearchErrors($Proj);
+    if($no_research){
         //if is not a research project but you want to go to production anyways
-        echo $research;
+        echo $no_research;
+    }else{
+            //if is research ask for PI and IRB
+        $PIErrors=PrintPIErrors($Proj);
+        $IRBErrors=PrintIRBErrors($Proj);
+        echo $PIErrors;
+        echo $IRBErrors;
     }
 
     $res_records= PrintTestRecordsErrors();
@@ -382,16 +386,16 @@ if($just_for_fun){
     $res_branching_logic= PrintBranchingLogicErrors($data_dictionary_array);
     $res_calculated_fields= PrintCalculatedFieldsErrors($data_dictionary_array);
     $res_today_in_calculations= PrintTodayInCalculationsErrors($data_dictionary_array);
-     $res_asi_logic=PrintASILogicErrors();
-     $res_queue_logic=PrintQueueLogicErrors();
-     $res_data_quality_logic=PrintDataQualityLogicErrors();
-     $res_reports_logic=PrintReportsLogicErrors();
+    $res_asi_logic=PrintASILogicErrors();
+    $res_queue_logic=PrintQueueLogicErrors();
+    $res_data_quality_logic=PrintDataQualityLogicErrors();
+    $res_reports_logic=PrintReportsLogicErrors();
     //$res_var_names_event_names=PrintVariableNamesWithTheSameNameAsAnEventNameErrors();//todo: fix this list
     $res_dates_consistent= PrintDatesConsistentErrors($data_dictionary_array);
     $res_yes_no_consistent= PrintYesNoConsistentErrors($data_dictionary_array);
     $res_positive_negative_consistent= PrintPositiveNegativeConsistentErrors($data_dictionary_array);
     $res_identifiers= PrintIdentifiersErrors($data_dictionary_array);
-    $res_number_of_fields_by_form=PrintNumberOfFieldsInForms($data_dictionary_array,30);
+    $res_number_of_fields_by_form=PrintNumberOfFieldsInForms($data_dictionary_array,100);
     $res_validated_fields=PrintValidatedFields($data_dictionary_array, 0.05);
     $res_my_first_instrument_found=MyFirstInstrumentError();
     $res_not_designated_forms=NotDesignatedFormsErrors();
@@ -432,6 +436,9 @@ if($just_for_fun){
         echo $res_number_of_fields_by_form;
         echo $res_my_first_instrument_found;
         echo $res_not_designated_forms;
+
+        /*to capture the metrics*/
+        require_once 'stanford_metrics.php';
 
     }else{
         //if all is ok you can go to production!!

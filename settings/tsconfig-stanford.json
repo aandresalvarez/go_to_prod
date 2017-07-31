@@ -1,0 +1,46 @@
+{
+  "other_or_unknown":
+  {
+    "active": true,
+    "type": "danger",
+    "similarity": 97,
+    "recommended_values": "97,88,98,99,999,9999,888,8888,-1,777,7777",
+    "keywords": "Other, Unknown, Don't know/Not sure ,Don't know,Not sure, Not Reported, NA, N/A, uninterpretable, otro, otra, no se, Other please specify, not obtained, missing data, do not know or not sure, refused, no response was entered on form despite affirming that the patient was untestable, no response was entered on form despite affirming that the patient was testable, did not provide answer / not answered, other type, unclear, not gradable, other frequency, sent or stored other, no data available, unable to examine"
+  }
+,
+  "yes_no":
+  {
+    "active": true,
+    "type": "danger",
+    "keywords_yes": "Yes, Si, yes, si, Yes*, Si*, 否 否",
+    "keywords_no": "No, no, No*"
+  }
+,
+  "positive_negative":
+  {
+    "active": true,
+    "type": "danger",
+    "keywords_positive": "Positive, Positive*, + ",
+    "keywords_negative": "Negative, Negative*, -"
+  }
+,
+  "test_records":
+  {
+    "active": true,
+    "type": "danger",
+    "no_records": 3,
+    "no_exports": 1
+  }
+,
+  "branching_logic":
+  {
+    "active": true,
+    "type": "danger"
+
+  }
+
+
+
+
+
+}

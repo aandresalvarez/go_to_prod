@@ -21,14 +21,14 @@ class check_consistency_for_lists //check_consistency_for_lists
      * @return string --- with the list of possible values for Yes
      */
 public static  function getYesWords(){
-        $var= "Yes, Si, yes, si, Yes*, Si*, 否 否";
+        $var= "Yes, Si, yes, si, Yes*, Si*, 否";
         return $var;
     }
     /**
      * @return string --- with the list of possible values for  No
      */
 public static function getNoWords(){
-        $var= "No, no, No*";
+        $var= "No, no, No*, 是";
         return $var;
     }
 

@@ -11,8 +11,7 @@
  */
 
 
-class check_pi_irb_type
-{
+class check_pi_irb_type{
     /**
      * @param $Proj
      * @return bool --True if the PI is found in the research project
@@ -36,12 +35,19 @@ class check_pi_irb_type
     return $purpose === "2" and strlen(trim($irb_number)) > 0 ? true : false;
     }
 
+
+
+
+
+
+
     /**
      * @param $Proj
      * @return bool -- True if Purpose of this project= Research
      */
     public static function IsAResearchProject($Proj){ // "2" for research
         $purpose=$Proj->project['purpose'];
+
         return $purpose === "2" ? true : false;
     }
 

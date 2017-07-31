@@ -10,7 +10,7 @@
 require_once "../../../redcap_connect.php";
 
 require  '../classes/messages.php';
-  echo '<pre>' . print_r($_SESSION["ReportsLogicErrors"], TRUE) . '</pre>';
+ // echo '<pre>' . print_r($_SESSION["ReportsLogicErrors"], TRUE) . '</pre>';
 ?>
 
 <div class="panel panel-default" width="50%">
