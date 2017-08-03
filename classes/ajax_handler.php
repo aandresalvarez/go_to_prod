@@ -438,7 +438,7 @@ if($just_for_fun){
         echo $res_not_designated_forms;
 
         /*to capture the metrics*/
-        require_once 'stanford_metrics.php';
+        //require_once 'stanford_metrics.php';
 
     }else{
         //if all is ok you can go to production!!
