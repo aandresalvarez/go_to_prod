@@ -1,11 +1,13 @@
 # go_to_prod
 
 
-Move to Production Check List
+<strong>Move to Production Check List</strong>
 
 plug-in for REDCap Version > 7.3.0
 
-If the thought of losing the data you have entered into your REDCap project sounds painful, you should be in production mode. Production mode helps protect your data from accidental mistakes. This plugin will allow you to verify if your project is ready to move to production mode or if you first need to fix something.
+One of the most time consuming and repetitive tasks for REDCap administrators is the review of 'Move to Production' requests. This step is critical to ensure proper database design and validation
+before data collection begins. If not done well, both small and large mistakes can jeopardize the quality of all subsequent work in the project. We constructed a plugin that enforces best practices and modifies
+the 'Move to Production' workflow. Initial results suggest a dramatic reduction in common design mistakes while also significantly reducing the REDCap administrator support burden.
 
 <strong><u>With this plugin, you can run the following checklist in the data dictionary of a REDCap database.<u/></strong>
 <ul>
@@ -27,9 +29,9 @@ If the thought of losing the data you have entered into your REDCap project soun
               <li>15. Forms not assigned to any event.  </li> 
                <li>16. Calculations using "Today".  </li> 
                 <li>17. The project is sufficiently tested (at least three test records and 1 data export)  </li> 
-                <li>18. <strong>New</strong> - Inconsistencies in ASI Logic  </li> 
-                 <li>19. <strong>New</strong> - Inconsistencies in Data Quality Module Logic  </li> 
-                <li>20. <strong>New</strong> - Inconsistencies in Advanced Reports Logic  </li> 
+                <li>18. Inconsistencies in ASI Logic  </li> 
+                 <li>19. Inconsistencies in Data Quality Module Logic  </li> 
+                <li>20. Inconsistencies in Advanced Reports Logic  </li> 
 </ul>
 
 ### See in action
