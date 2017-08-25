@@ -33,10 +33,9 @@ the 'Move to Production' workflow. Initial results suggest a dramatic reduction 
     <li>Inconsistencies in Advanced Reports Logic.</li> 
 </ol>
 
-### See in action
-![Example](/gotoprod.gif?raw=true "Check list Example")
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zsoDnBT21jA" frameborder="0" allowfullscreen></iframe>
+# See in action 
+[![IMAGE ALT TEXT HERE](/gotoprod.gif?raw=true "Check list Example")](https://youtu.be/zsoDnBT21jA)
+https://youtu.be/zsoDnBT21jA 
 
 # Installation instructions:
 <ol>
