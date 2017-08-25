@@ -37,7 +37,7 @@ the 'Move to Production' workflow. Initial results suggest a dramatic reduction 
 [![IMAGE ALT TEXT HERE](/gotoprod.gif?raw=true "Check list Example")](https://youtu.be/zsoDnBT21jA)
 https://youtu.be/zsoDnBT21jA 
 
-# Installation instructions:
+## Installation instructions:
 <ol>
     <li>Go to GitHub https://github.com/aandresalvarez/go_to_prod. </li>
     <li>Clone or download repository (Green button) </li>
