@@ -35,3 +35,19 @@ the 'Move to Production' workflow. Initial results suggest a dramatic reduction 
 
 ### See in action
 ![Example](/gotoprod.gif?raw=true "Check list Example")
+
+
+<strong>Installation instructions:</strong>
+1.	Go to GitHub https://github.com/aandresalvarez/go_to_prod.
+2.	Clone or download repository (Green button)
+1.	Paste the unzipped folder in your folder: /redcap/plugins/.  
+3.	Now your folder looks like this: /redcap/plugins/go_to_prod-master
+4.	Rename the folder from “go_to_prod-master” to “go_prod”
+5.	Now the plugin is ready for accessing.
+6.	In a browser open https://yourredcapinstallation/plugins/go_prod/index.php?pid=XX, replace XX with the Project ID for the project   you want to check.
+7.	Optional: Set a project bookmark with the link.
+
+Note 1: The REDCap go to production workflow is not affected by installing this plugin. To change the workflow, it is necessary to build your own hook. 
+Note 2:  Metrics are not automatically captured. This requires the creation of an extra REDCap project and configuration.
+
+All feedback is well received! Hope this helps.
