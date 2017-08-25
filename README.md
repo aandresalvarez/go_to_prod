@@ -40,7 +40,7 @@ the 'Move to Production' workflow. Initial results suggest a dramatic reduction 
 <strong>Installation instructions:</strong>
 1.	Go to GitHub https://github.com/aandresalvarez/go_to_prod.
 2.	Clone or download repository (Green button)
-1.	Paste the unzipped folder in your folder: /redcap/plugins/.  
+1.	Paste the unzipped folder in your /redcap/plugins/ folder. 
 3.	Now your folder looks like this: /redcap/plugins/go_to_prod-master
 4.	Rename the folder from “go_to_prod-master” to “go_prod”
 5.	Now the plugin is ready for accessing.
