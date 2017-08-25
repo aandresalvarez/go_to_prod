@@ -39,13 +39,13 @@ the 'Move to Production' workflow. Initial results suggest a dramatic reduction 
 
 # Installation instructions:
 <ol>
-    <li> Go to GitHub https://github.com/aandresalvarez/go_to_prod. </li>
-    <li> Clone or download repository (Green button) </li>
-    <li> Paste the unzipped folder in your /redcap/plugins/ folder.  </li>
-    <li> Now your folder looks like this: /redcap/plugins/go_to_prod-master.</li>
-    <li> Rename the folder from “go_to_prod-master” to “go_prod”.</li>
-    <li> Now the plugin is ready for accessing.</li>
-    <li> In a browser open https://yourredcapinstallation/plugins/go_prod/index.php?pid=XX, replace XX with the Project ID             for the project   you want to check.</li>
+    <li>Go to GitHub https://github.com/aandresalvarez/go_to_prod. </li>
+    <li>Clone or download repository (Green button) </li>
+    <li>Paste the unzipped folder in your /redcap/plugins/ folder.  </li>
+    <li>Now your folder looks like this: /redcap/plugins/go_to_prod-master.</li>
+    <li>Rename the folder from “go_to_prod-master” to “go_prod”.</li>
+    <li>Now the plugin is ready for accessing.</li>
+    <li>In a browser open https://yourredcapinstallation/plugins/go_prod/index.php?pid=XX, replace XX with the Project ID             for the project   you want to check.</li>
     <li> Optional: Set a project bookmark with the link.</li>
 </ol>
 
