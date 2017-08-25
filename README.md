@@ -36,6 +36,7 @@ the 'Move to Production' workflow. Initial results suggest a dramatic reduction 
 ### See in action
 ![Example](/gotoprod.gif?raw=true "Check list Example")
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zsoDnBT21jA" frameborder="0" allowfullscreen></iframe>
 
 # Installation instructions:
 <ol>
