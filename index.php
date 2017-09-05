@@ -12,6 +12,7 @@ if (!isset($project_id)) {
     die('Project ID is a required field');
 }
 $temp_name = USERID;
+$users = REDCap::getUsers();
 if (!in_array($temp_name, $users)) {
     print "User does NOT have access to this project.";
 }
