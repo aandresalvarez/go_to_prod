@@ -89,8 +89,8 @@ table.go_prod_table tr {
 
 
 .icon-flag.logo-icon-success {
-    width: 28px;  // 14px * 2
-height: 28px; // 14px * 2
-background-size: 938px 318px;  // original dimensions * 2
-background-position: -624px -48px;  // original position * 2
+    width: 28px;  /* 14px * 2 */
+height: 28px; /* 14px * 2  */
+background-size: 938px 318px;  /* original dimensions * 2  */
+background-position: -624px -48px;  /* original position * 2  */
 }
