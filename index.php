@@ -46,6 +46,12 @@ echo "</pre>";*/
 
 
 ?>
+
+
+
+
+
+
 <link rel="stylesheet" href="styles/go_prod_styles.css">
 
 
@@ -170,6 +176,16 @@ if($status != 1 or $_SESSION["IsJustForFun"]!=true){ //USERID == 'alvaro1' and
             location.href = production;
         };
     </script>
+
+
+  ss  <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <?php
 

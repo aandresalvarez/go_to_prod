@@ -162,7 +162,7 @@ function PrintTodayInCalculationsErrors($DataDictionary){
 
 
 function PrintVariableNamesWithTheSameNameAsAnEventNameErrors(){
-    include_once "check_presence_of_branching_and_calculated_variables.php";
+    include_once "Check_presence_of_branching_and_calculated_variables.php";
     $res= new check_presence_of_branching_andcalculated_variables();
     $array=$res::VariableNamesWithTheSameNameAsAnEventName();
     if (!empty($array)){
