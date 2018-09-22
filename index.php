@@ -46,12 +46,6 @@ echo "</pre>";*/
 
 
 ?>
-
-
-
-
-
-
 <link rel="stylesheet" href="styles/go_prod_styles.css">
 
 
@@ -66,9 +60,9 @@ echo "</pre>";*/
                 <thead>
                 <tr>
                     <th><strong></strong></th>
-                    <th><h4 class="projhdr"><?php echo lang('VALIDATION');?> </h4></th>
-                    <th><h4 class="projhdr"><?php echo lang('RESULT');?></h4></th>
-                    <th><h4 class="projhdr"><?php echo lang('OPTIONS');?></h4></th>
+                    <th><h6 class="projhdr"><?php echo lang('VALIDATION');?> </h6></th>
+                    <th><h6 class="projhdr"><?php echo lang('RESULT');?></h6></th>
+                    <th><h6 class="projhdr"><?php echo lang('OPTIONS');?></h6></th>
                 </tr>
                 </thead>
                                  <!--INITIAL RESULTS ARE LOADED HERE-->
@@ -81,19 +75,28 @@ echo "</pre>";*/
 
 
     <!--REUSABLE MODAL -->
-    <div id="ResultsModal" class="modal fade">
-        <div class="modal-dialog modal-md">
+
+
+    <div id="ResultsModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog  " role="document">
             <div class="modal-content">
-                <div class="modal-header">
+
+                <div  class="modal-body">
+
+                    <div id="remote-html">
+                        <div id="gp-loader"><div class="lds-ripple"><div></div><div></div></div></div>
+                    </div>
+
                 </div>
-                <div class="modal-body">
-                    <p><?php echo lang('LOADING');?></p>
-                </div>
+
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
+
+
+
+
+
 
     <div id="edit_project" style="display:none;" title="<?php print cleanHtml2($lang['config_functions_30']) ?>">
         <div class="round chklist" style="padding:10px 20px;">
@@ -122,36 +125,36 @@ if($status != 1 or $_SESSION["IsJustForFun"]!=true){ //USERID == 'alvaro1' and
     <div id='final-info' style="display: none">
         <br>
 
-        <h4 class="projhdr"><?php echo lang('NOTICE');?></h4>
+        <h5 class="projhdr"><?php echo lang('NOTICE');?></h5>
     <hr>
-    <ul class="list-group col-md-6 col-sm-6 col-xs-12">
+    <ul class="list-group">
         <li class="list-group-item">
-            <h4 class="list-group-item-heading"><?php echo lang('INFO_WHAT_NETX');?></h4>
+            <h5 class="list-group-item-heading"><?php echo lang('INFO_WHAT_NETX');?></h5>
             <p class="list-group-item-text"> <?php echo lang('INFO_WHAT_NETX_BODY');?></p>
             <br>
         </li>
-        <br>
+
         <li class="list-group-item">
             <p class="list-group-item-text"><?php echo lang('INFO_WHAT_NETX_BODY_2');?></p>
         </li>
     </ul>
-    <ul class="list-group col-md-6 col-sm-6 col-xs-12">
+    <ul class="list-group">
         <li class="list-group-item">
-            <h4 class="list-group-item-heading"><?php echo lang('INFO_CITATION');?></h4>
+            <h5 class="list-group-item-heading"><?php echo lang('INFO_CITATION');?></h5>
             <p class="list-group-item-text"><?php echo lang('INFO_CITATION_BODY');?>  </p>
         </li>
-        <br>
+
         <li class="list-group-item">
-            <h4 class="list-group-item-heading"><?php echo lang('INFO_STATISTICIAN_REVIEW');?>  </h4>
+            <h5 class="list-group-item-heading"><?php echo lang('INFO_STATISTICIAN_REVIEW');?>  </h5>
             <p class="list-group-item-text"> <?php echo lang('INFO_STATISTICIAN_REVIEW_BODY');?> </p>
         </li>
     </ul>
 
 
     <div class="col-md-12 col-sm-6 col-xs-12 col-lg-12 text-center well" >
-        <h4>
+        <h5>
             <?php echo lang('I_AGREE_BODY');?>
-        </h4> <br><button id="go_prod_accept_all" class=" btn btn-md btn-success text-center "> <?php echo lang('I_AGREE');?> </button>
+        </h5> <br><button id="go_prod_accept_all" class=" btn btn-md btn-success text-center "> <?php echo lang('I_AGREE');?> </button>
     </div>
     </div>
 
@@ -177,18 +180,12 @@ if($status != 1 or $_SESSION["IsJustForFun"]!=true){ //USERID == 'alvaro1' and
         };
     </script>
 
-
-  ss  <div id="google_translate_element"></div>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <?php
+   // array_push($_SESSION[(string)$_GET['pid']], "search..2");
 
+    //print_array($_SESSION[(string)$_GET['pid']]);
+    //echo $_GET['pid'];
+    //print_array($_SESSION["OtherOrUnknownErrors1"]);
 }
 
 
