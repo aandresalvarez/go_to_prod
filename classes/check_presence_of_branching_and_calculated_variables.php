@@ -91,15 +91,31 @@ class check_presence_of_branching_and_calculated_variables
         return $var;
     }
 
-    public static function ExtractQueueLogic(){ //TODO: for some reason in some projects the query returns an extra logic variable that does not exist and is created by REDCap.. (partiali fixed).
+    public static function ExtractQueueLogic(){ //TODO: for some reason in some projects the query returns an extra logic variable that does not exist and is created by REDCap.. (partially fixed). Update: looks like REDCap is not deleting (removing) the queue logic when is deactivated  in the survey_queue_setup.php (send Ticket to consortium)
 
         $var=Array();
-        $sql = "SELECT 
+       /* $sql = "SELECT
 	              SRV.form_name as form,  RSQ.event_id as event_id, RSQ.condition_logic as logic 
                 FROM 
 	              redcap_surveys as SRV, redcap_surveys_queue as RSQ 
                 WHERE
-	               RSQ.condition_logic IS NOT NULL and RSQ.active=1 and SRV.survey_id=RSQ.survey_id and SRV.project_id=".$_GET['pid'];
+	               RSQ.condition_logic IS NOT NULL and RSQ.active=1 and SRV.survey_id=RSQ.survey_id and SRV.project_id=".$_GET['pid'];*/
+        $sql = "SELECT
+                      rs.form_name as form,  rsq.event_id as event_id, rsq.condition_logic as logic 
+                    FROM
+                      redcap_surveys_queue rsq
+                      join redcap_surveys rs on rsq.survey_id = rs.survey_id
+                    WHERE
+                       rsq.active=1
+                      AND rs.form_name in (
+                        SELECT
+                          DISTINCT rm.form_name
+                        FROM
+                          redcap_metadata rm
+                        WHERE
+                          rm.project_id = rs.project_id
+                      ) and rs.project_id =".$_GET['pid'];
+
         $result = db_query( $sql );
         while ( $query_res = db_fetch_assoc( $result ) )
         {

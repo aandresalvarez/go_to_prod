@@ -13,6 +13,13 @@
 
 
 }
+
+.modal-dialog{
+    max-width: inherit !important;
+
+}
+
+
 #go_prod_accept_all:hover {
     outline: none;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
@@ -39,6 +46,44 @@ table.go_prod_table {
 }
 
 
+.overflow{
+    height: 200px !important;
+    overflow: auto !important;
+
+}
+
+.overflow{
+    scrollbar-face-color: #367CD2;
+    scrollbar-shadow-color: #FFFFFF;
+    scrollbar-highlight-color: #FFFFFF;
+    scrollbar-3dlight-color: #FFFFFF;
+    scrollbar-darkshadow-color: #FFFFFF;
+    scrollbar-track-color: #FFFFFF;
+    scrollbar-arrow-color: #FFFFFF;
+}
+
+/* Let's get this party started */
+.overflow::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+.overflow::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+.overflow::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(51, 164, 225, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+
+
 
 table.go_prod_table tr:hover {
     background-color: #f9ab3d !important;
@@ -63,15 +108,15 @@ table.go_prod_table tr {
 
 /* loading effect*/
 .loader {
-    position: absolute;
+    position:center;
     left: 30%;
     top: 100%;
     z-index: 1;
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     animation: spin 0.5s linear infinite;
 
 
@@ -89,8 +134,8 @@ table.go_prod_table tr {
 
 
 .icon-flag.logo-icon-success {
-    width: 28px;  /* 14px * 2 */
-height: 28px; /* 14px * 2  */
-background-size: 938px 318px;  /* original dimensions * 2  */
-background-position: -624px -48px;  /* original position * 2  */
+    width: 28px;  // 14px * 2
+height: 28px; // 14px * 2
+background-size: 938px 318px;  // original dimensions * 2
+background-position: -624px -48px;  // original position * 2
 }

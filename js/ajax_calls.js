@@ -45,24 +45,39 @@ $( document ).ready(function() {
                 $(this).children('.gp-body-content').slideToggle();
             });
 
-            /*this code remove the content from the modal when is closed */
-            $("#ResultsModal").on('hidden.bs.modal', function (e) {
-                e.preventDefault();
-            });
+            // /*this code remove the content from the modal when is closed */
+            // $("#ResultsModal").on('hidden.bs.modal', function (e) {
+            //     e.preventDefault();
+            // });
+            //
+            // /* This code load the content of the link in the same modal */
+            // $(function() {
+            //     $('[data-load-remote]').on('click',function(e) {
+            //         e.preventDefault();
+            //         var $this = $(this);
+            //         var remote = $this.data('load-remote');
+            //         if(remote) {
+            //             $($this.data('remote-target')).load(remote);
+            //             $this.data('isloaded', true)
+            //         }
+            //     });
+            //
+            // });
 
-            /* This code load the content of the link in the same modal */
-            $(function() {
-                $('[data-load-remote]').on('click',function(e) {
-                    e.preventDefault();
-                    var $this = $(this);
-                    var remote = $this.data('load-remote');
-                    if(remote) {
-                        $($this.data('remote-target')).load(remote);
-                        $this.data('isloaded', true)
-                    }
+
+
+                var ResultsModal =$("#ResultsModal");
+                ResultsModal.on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget); // Button that triggered the modal
+                    var url = button.data('link'); // Extract info from data-* attributes
+                    $("#remote-html").load(url);
+                    //$('.lds-ripple').hide();
+
+
+
                 });
 
-            });
+
 
             $('#go_prod_go_btn').prop("disabled",false);
            // $('#go_prod_go_btn').html('Run again');
